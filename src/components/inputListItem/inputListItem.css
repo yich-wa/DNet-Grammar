@@ -1,0 +1,59 @@
+.ili-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-radius: 5px;
+    background-color: #e2e5e9;
+    border: 2px solid #e2e5e9;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.ili-name {
+    margin: 4px;
+    margin-left: 5px;
+    height: 18px;
+}
+
+
+.ili-left {
+    width: 190px;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 10px;
+    box-sizing: border-box;
+}
+
+.ili-left-default {
+    background-color: #fff;
+    color: #bbb ;
+}
+
+.ili-left-active {
+    background-color: rgba(70,130,180, 0.5);
+    color: #222 ;
+    border: 2px dashed rgb(70,130,180);
+}
+
+.ili-left-filled{
+    width: 160px;
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 30px;
+    padding-left: 10px;
+    box-sizing: border-box;
+    background-color: rgb(215,215,215);
+    color: #000 ;
+    text-align: center;
+}
+
+.ili-delete-svg{
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+

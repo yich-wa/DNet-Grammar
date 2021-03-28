@@ -12,6 +12,18 @@
     text-align: center;
 }
 
+.cbpl-sub-title{
+    font-size: 14px;
+    padding: 0 5px;
+    font-weight: 400;
+    color: #444;
+    cursor: pointer;
+}
+.cbpl-sub-choose{
+    color: #fda167;
+    font-weight: 700;
+}
+
 .cbpl-content-container {
     display: flex;
     justify-content: flex-start;

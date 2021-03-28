@@ -1,0 +1,29 @@
+.dli-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-radius: 5px;
+    background-color: #e2e5e9;
+    align-items: center;
+    margin: 10px 0;
+    cursor: move;
+}
+
+.dli-name{
+    margin-left: 10px;
+}
+
+.dli-container{
+    margin-left: 5px;
+}
+
+.dli-left{
+    margin : 0 10px;
+    
+}
+
+.dli-svg{
+    margin: 5px;
+    width: 15px;
+    height: 15px;
+}

@@ -34,7 +34,7 @@ export const TIME_TIMELINE_ELEMENT = ['node', 'link', 'all']
 export const TIME_CHART_TYPE = ['line', 'bar']
 export const TIME_TIMELINE_TYPE = ['linear', 'circular']
 export const GRAPH_LAYOUT_TYPE = ['matrix','grid','forceDirect','bipartite', 'vertical','circular','dagre','mds','oneMds']
-
+export const TIME_ENCODING_TYPE = ['timeLine', 'animation', 'color', 'chart', 'mark', 'insert']
 export const KEYFRAM_OPTIONS = ['next', 'last']
 
 export const ROW_BUTTON_STYLE = {
@@ -56,3 +56,11 @@ export const REACT_JSON_OPTIONS = {
   enableClipboard: false,
   displayObjectSize: false
 }
+
+export const ARROW_PATH = 'M-8,-8 L0,-3 L8,-8 L0,8 L-8,-8'
+
+export const AXIS_COLOR = 'rgb(90,90,90)'
+
+export const EACH_WIDTH = 300
+export const EACH_HEIGHT = 300
+export const EACH_MARGIN = 0
