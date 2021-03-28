@@ -16,8 +16,8 @@ import SampleItem from '../sampleItem/sampleItem.js'
 import './timePanel.css'
 import { connect } from "react-redux"
 import { 
-	modifyConfig, 
-} from '../../redux/config.redux.js'
+	modifyAcitveConfig, 
+} from '../../redux/configsGroup.redux.js'
 
 const { Option } = Select
 
@@ -77,7 +77,7 @@ class TimePanel extends React.Component {
         })
     }
     changeTimeConfig = (value) => {
-        this.props.modifyConfig({key:'time', value})
+        this.props.modifyAcitveConfig({key:'time', value, activeIndex: this.props.activeIndex})
     }
     render() {
         const options = this.props.options
@@ -446,11 +446,12 @@ class TimePanel extends React.Component {
 
 
 const mapStateToProps = (state)=>({
-	options: state.config.time
+	options: state.configsGroup[state.activeIndex].time,
+    activeIndex: state.activeIndex
 })
 
 const mapDispatchToProps = {
-	modifyConfig,
+	modifyAcitveConfig,
 } 
 
 export default connect(mapStateToProps,mapDispatchToProps)(TimePanel)

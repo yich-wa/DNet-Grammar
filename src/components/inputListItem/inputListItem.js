@@ -12,11 +12,13 @@ import {
 function InputListItem(props) {
 	const {info ,itemIndex, rowIndex} = props
 	const handleDelete = ()=>{
+		console.log("handleDelete--",itemIndex, rowIndex)
 		props.updateItemClearRow(itemIndex, rowIndex)
 	}
 	const handleOnDrop = (event)=>{
 		event.preventDefault()
 		const content=event.dataTransfer.getData("Text")
+		console.log("handleOnDrop--",itemIndex, rowIndex, content)
 		props.updateItemInputRow(itemIndex, rowIndex, content)
 	}
 	return (

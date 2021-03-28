@@ -14,8 +14,8 @@ import { COMPARISON_CONFIG } from '../../util/defaultConfig.js'
 import './comparisonPanel.css'
 import { connect } from "react-redux"
 import { 
-	modifyConfig, 
-} from '../../redux/config.redux.js'
+	modifyAcitveConfig, 
+} from '../../redux/configsGroup.redux.js'
 
 const { Option } = Select
 const { Panel } = Collapse
@@ -116,7 +116,7 @@ class TaskPanel extends React.Component {
         })
     }
     changeTaskConfig = (value) =>{
-        this.props.modifyConfig({key:'task', value})
+        this.props.modifyAcitveConfig({key:'task', value, activeIndex: this.props.activeIndex})
     }
 
     render() {
@@ -456,11 +456,12 @@ class TaskPanel extends React.Component {
 
 
 const mapStateToProps = (state)=>({
-	options: state.config.task
+    options: state.configsGroup[state.activeIndex].task,
+    activeIndex: state.activeIndex
 })
 
 const mapDispatchToProps = {
-	modifyConfig,
+	modifyAcitveConfig,
 } 
 
 export default connect(mapStateToProps,mapDispatchToProps)(TaskPanel)
