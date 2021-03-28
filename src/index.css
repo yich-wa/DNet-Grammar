@@ -1,3 +1,13 @@
+@font-face{
+　　font-family: 'lato';
+　　src: url('./assets/Lato-Regular.ttf');
+}
+
+@font-face{
+    font-family: 'DFPSongW9';
+    src : url('./assets/DFPSongW9.ttf');
+}
+
 #root {
     /* overflow-x: hidden; */
     /* overflow-x: auto; */
@@ -8,6 +18,9 @@ body {
     /* overflow-x: auto; */
     /* overflow-y: hidden;  */
     overflow-y: auto;
+    text-transform: capitalize;
+    /* font-family:'lato'; */
+    font-family: 'DFPSongW9';
 }
 
 body::-webkit-scrollbar-track {

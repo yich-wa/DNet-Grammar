@@ -14,7 +14,7 @@ import * as flowData from '../../data/import/test5.json'
 
 const dataset = [
     {
-        dataName: 'testData',
+        dataName: 'DynamicData-1',
         description: '测试数据，数据量一般',
         data: testData.default
     },
@@ -24,17 +24,17 @@ const dataset = [
         data: simpleData.default
     },
     {
-        dataName: 'insertData',
+        dataName: 'InsertData',
         description: '展示插入节点的样例数据',
         data: insertData.default
     },
     {
-        dataName: 'flowData',
+        dataName: 'FlowData',
         description: '展示mds一维降维数据',
         data: flowData.default
     },
     {
-        dataName: 'shortPathData',
+        dataName: 'ShortPathData',
         description: '展示最短路径',
         data: shortPathData.default
     },
@@ -265,7 +265,7 @@ class DataPanel extends React.Component {
                             onChange={this.handleTimeSliderChange}
                         />
                         <Button
-                            type="primary"
+                            // type="primary"
                             size="small"
                             onClick={this.handleAddButton}
                             style={{
@@ -347,7 +347,7 @@ class DataPanel extends React.Component {
                         }}
                     >
                         <Button
-                            type="primary"
+                            // type="primary"
                             size="small"
                             disabled={this.state.selected === -1 ? true : false}
                             onClick={this.handleCertainButton}
