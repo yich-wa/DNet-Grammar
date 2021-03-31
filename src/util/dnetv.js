@@ -51,6 +51,10 @@ class DNetV {
         this.markLine = time.chooseTypes.indexOf('markLine') > -1
             ? u.getmarkLine(this.sumGraphs, this.timeGraphs, this.configs)
             : undefined
+            
+        // 在布局确定之后再去，过滤数据。不然数据先过滤了，会影响布局
+        u.filterDataFromChange(this.timeGraphs, this.sumGraphs, this.configs)
+
         // 根据配置信息中：样式，以及time，以及comparison信息，去设定样式
         u.setStyle(this.timeGraphs, this.sumGraphs, this.configs)
         this.subGraphs = Object.values(this.timeGraphs).map((v) => ({

@@ -1,6 +1,7 @@
 import * as d3 from 'd3'
 import { defaultConfigs,  COMPARISON_CONFIG} from './defaultConfig'
 import * as _lodash from 'lodash'
+import {PATTERN_TO_CHANGE} from './const.js'
 import assign from 'assign-deep'
 import { path } from 'd3'
 
@@ -861,7 +862,29 @@ export function getDisplayGrammar(config){
     }
 }
 
-
+export function addPatternAndChange(config){
+    const {task} = config
+    if(task.taskType==='comparison'){
+        if(task.basedType==='structure'){
+            task.pattern = 'graph'
+        }else{
+            task.pattern = 'compare-degree'
+        }
+    }else if(task.taskType === 'find'){
+        if(task.basedType==='structure'){
+            if(task.find.structure==='shortest-path'){
+                task.pattern = 'shortest-path'
+            }else{
+                task.pattern = 'dumb-bell'
+            }
+        }else{
+            task.pattern = 'find-degree'
+        }
+    }else{
+        task.pattern = 'graph'
+    }
+    task.change = [...PATTERN_TO_CHANGE[task.pattern]]
+}
 
 export function getSimpleGrammar(config){
     return {

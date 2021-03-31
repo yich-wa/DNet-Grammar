@@ -13,11 +13,21 @@ import { update } from '../../redux/config.redux.js'
 import * as assign from 'assign-deep'
 import { initConfig } from '../../util/initConfig.js'
 import * as _ from 'lodash'
+import { addPatternAndChange } from '../../util/dnetChart'
 
 function TemplatePanel(props) {
     const [localStorage, setLocalStorage] = useState(window.localStorage)
     const [storageLength, setStorageLength] = useState(0)
     const [storageKeyArr, setStorageKeyArr] = useState(getStorageKeyArr(localStorage))
+    // const [config,setConfig] = useState(props.config)
+    // // const [width, setWidth] = useState(0)
+    // // const [height, setHeight] = useState(0)
+    // useEffect(()=>{
+    //     setConfig(props.config)
+    // },[props.config])
+    
+
+
 
     useEffect(() => {
         // 初始化，判断该电脑的localStorage是否加载过默认的模板，没有先加载
@@ -86,11 +96,16 @@ function TemplatePanel(props) {
         }
     }
 
+    function coverConfig(newInitConfig, vConfig){
+        assign(newInitConfig, vConfig)
+        addPatternAndChange(newInitConfig)
+    }
+
     function handleTemplateCheck(v) {
         const vContent = JSON.parse(localStorage.getItem(v))
         if (vContent && vContent.config) {
             const newInitConfig = _.cloneDeep(initConfig)
-            assign(newInitConfig, vContent.config)
+            coverConfig(newInitConfig, vContent.config)
             props.update(newInitConfig)
         }
     }
@@ -103,8 +118,10 @@ function TemplatePanel(props) {
     return (
         <div
             style={{
-                width: `${props.width ? props.width : 1030}px`,
-                height: `${props.height ? props.height : 456}px`
+                // width: `${props.width ? props.width : 1030}px`,
+                // height: `${props.height ? props.height : 456}px`
+                width: '1030px',
+                height: '456px'
             }}
             className="template-panel-box"
         >
@@ -124,7 +141,7 @@ function TemplatePanel(props) {
                         return null
                     }
                     return (
-                        <div className="sample-item-wrap" key={`sample-${v}`}>
+                        <div className="sample-item-wrap" key={`sample-${storageIndex}`}>
                             <div className="sample-item-information">
                                 <div className="sample-item-icon">
                                     <div className="item-image-wrap">
@@ -174,5 +191,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
     update
 }
+// function areEqual(prevProps, nextProps) {
+//     return true
+// }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TemplatePanel)
+// export default React.memo(connect(mapStateToProps, mapDispatchToProps)(TemplatePanel), areEqual)

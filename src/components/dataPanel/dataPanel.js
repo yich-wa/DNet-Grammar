@@ -367,7 +367,7 @@ class DataPanel extends React.Component {
                             disabled={this.state.selected === -1 ? true : false}
                             onClick={this.handleCertainButton}
                         >
-                            确定
+                            Certain
                         </Button>
                     </div>
                 </Modal>

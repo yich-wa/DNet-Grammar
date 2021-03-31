@@ -1,3 +1,4 @@
+import {PATTERN_TO_CHANGE} from './const.js'
 export const COMPARISON_CONFIG = [
     'shape',
     'fillColor',
@@ -14,7 +15,7 @@ export const initConfig = {
         eachHeight: 300,
         margin: 30,
         layout: {
-            chooseType: 'circular',
+            chooseType: 'matrix',
             vertical: {
                 yDistance: 40,
                 linkStyle: {
@@ -60,11 +61,11 @@ export const initConfig = {
             shape: 'line',
             strokeColor: '#908F8F',
             strokeType: 'solid',
-            strokeWidth: 2,
+            strokeWidth: 1,
             opacity: 1,
             strokeDasharray: '3,3',
             pointShape: 'rect',
-            pointFillColor: '#98F3E3',
+            pointFillColor: '#E6E6E6',
             pointOpacity: 1,
             pointRadius: 8,
             pointStrokeWidth:1,
@@ -73,7 +74,7 @@ export const initConfig = {
         }
     },
     time: {
-        chooseTypes:[],
+        chooseTypes:['timeLine'],
         timeLine: {
             xDistance: 330,
             yDistance: 0,
@@ -112,7 +113,7 @@ export const initConfig = {
             endColor: '#5DBDAD'
         },
         animation: {
-            speed: 1800
+            speed: 500
         },
         markLine: {
             shape: 'line',
@@ -128,15 +129,18 @@ export const initConfig = {
     },
     task: {
         // 任务类型有：comparison\find\filter
-        taskType: 'find',
+        taskType: 'comparison',
         basedType: 'structure',
         find:{
             attr:'degree',
             // 结构有shortest-path，也有哑铃结构dumb-bell
-            structure: 'shortest-path',
+            structure: 'graph',
             relation: '>=',
             value: 3
         },
+        pattern: 'graph',
+        // change: [...PATTERN_TO_CHANGE['graph']],
+        change: [],
         comparison: {
             chooseItem: 'stable-Node',
             chooseTypes: COMPARISON_CONFIG,
@@ -146,8 +150,8 @@ export const initConfig = {
             elements: 'all',
             appearNode: {
                 shape: 'rect',
-                fillColor: '#ECAA7B',
-                strokeColor: '#000000',
+                fillColor: '#F0785D',
+                strokeColor: '#454444',
                 strokeWidth: 1,
                 strokeType: 'solid',
                 textColor: 'white',
@@ -156,7 +160,7 @@ export const initConfig = {
             },
             stableNode: {
                 shape: 'circle',
-                fillColor: '#DAD5D5',
+                fillColor: '#E6E6E6',
                 strokeColor: '#000000',
                 strokeWidth: 1,
                 radius: 6,
@@ -166,7 +170,7 @@ export const initConfig = {
             },
             disappearNode: {
                 shape: 'circle',
-                fillColor: '#98F3E3',
+                fillColor: '#24B8E8',
                 strokeColor: '#000000',
                 strokeWidth: 1,
                 radius: 8,
@@ -176,9 +180,9 @@ export const initConfig = {
             },
             appearLink: {
                 shape: 'curve',
-                strokeColor: '#ECAA7B',
+                strokeColor: '#F0785D',
                 strokeType: 'solid',
-                strokeWidth: 3,
+                strokeWidth: 1,
                 opacity: 1,
                 strokeDasharray: '3,3',
                 // fillColor: '#ffffff',
@@ -186,7 +190,7 @@ export const initConfig = {
             },
             stableLink: {
                 shape: 'line',
-                strokeColor: '#908F8F',
+                strokeColor: '#DAD5D5',
                 strokeType: 'solid',
                 strokeWidth: 1,
                 opacity: 1,
@@ -196,9 +200,9 @@ export const initConfig = {
             },
             disappearLink: {
                 shape: 'curve',
-                strokeColor: '#98F3E3',
+                strokeColor: '#24B8E8',
                 strokeType: 'solid',
-                strokeWidth: 3,
+                strokeWidth: 1,
                 opacity: 1,
                 strokeDasharray: '3,3',
                 // fillColor: '#ffffff',

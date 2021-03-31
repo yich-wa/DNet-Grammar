@@ -4,6 +4,7 @@ import * as assign from 'assign-deep'
 import { getInsertPosition } from './dnetChart.js'
 import * as _ from 'lodash'
 import G6 from '@antv/g6'
+import {TASK_CHANGE_TYPES} from './const'
 import { dsvFormat } from 'd3'
 export const _intersection = (setA, setB) => {
     let intersection = new Set(setA)
@@ -1420,9 +1421,10 @@ export const getLongestPath = (matrix, startIndex, endIndex)=>{
 }
 
 export const getFindData = (timeGraphs, configs,sumGraphs) => {
-    const findOptions = configs.task.find
+    const {find: findOptions, pattern} = configs.task
     if (configs.task.basedType === 'structure') {
-        if(findOptions.structure === 'dumb-bell'){
+        if(pattern === 'dumb-bell'){
+        // if(findOptions.structure === 'dumb-bell'){
             // 找结构，现在是假定是找这种类似于哑铃的形态结构。
             for (let timeId in timeGraphs) {
                 const graph = timeGraphs[timeId]
@@ -1438,7 +1440,8 @@ export const getFindData = (timeGraphs, configs,sumGraphs) => {
                     }
                 }
             }
-        }else if(findOptions.structure==='shortest-path'){
+        // }else if(findOptions.structure==='shortest-path'){
+        }else if(pattern === 'shortest-path'){
             let startIndex = 0
             const mapId2Index = {}
             const mapIndex2Id = []
@@ -1554,6 +1557,211 @@ export const getFindData = (timeGraphs, configs,sumGraphs) => {
     }
 }
 
+export const filterDataFromChange = (timeGraphs, sumGraphs, configs) =>{
+    const { change } = configs.task
+    
+    if(!change){
+        return
+    }
+    // 都有就不处理了直接返回
+    if(change.length === TASK_CHANGE_TYPES.length){
+        return
+    }
+
+    const changeOptionsToStatus = {
+        'appearNode':false,
+        'stableNode': false,
+        'disappearNode': false,
+        'appearLink':false,
+        'stableLink': false,
+        'disappearLink': false,
+    }
+    for(let i=0;i<change.length;i++){
+        switch(change[i]){
+            case 'appearedNode':
+                changeOptionsToStatus['appearNode'] = true
+                break
+            case 'unchangedNode':
+                changeOptionsToStatus['stableNode'] = true
+                break
+            case 'disappearedNode':
+                changeOptionsToStatus['disappearNode'] = true
+                break
+            case 'appearedEdge':
+                changeOptionsToStatus['appearLink'] = true
+                break
+            case 'unchangedEdge':
+                changeOptionsToStatus['stableLink'] = true
+                break
+            case 'disappearedEdge':
+                changeOptionsToStatus['disappearLink'] = true
+                break  
+        }
+    }
+    // console.log("----change--changeOptionsToStatus",change,changeOptionsToStatus)
+    // console.log("changeOptionsToStatus",changeOptionsToStatus)
+    let { nodes, links } = sumGraphs
+    // 依据元素的status和changeOptionsToStatus去进行数据过滤
+    // status如果没有东西的话，那默认就是unchanged
+    // 如果status里面有两种状态的话。一个有一个没有的话，status就删除那个没有的
+
+    //过滤总图的节点
+    for(let i = 0;i<nodes.length;){
+        let node = nodes[i]
+        if(Array.isArray(node.status)){
+            if(node.status.length >=2){
+                for(let j =0;j<node.status.length;){
+                    if(changeOptionsToStatus[node.status[j]]===false){
+                        node.status.splice(j,1)
+                    }else{
+                        j++
+                    }
+                }
+                if(node.status.length===0){
+                    //删除掉该节点
+                    nodes.splice(i,1)
+                }else{
+                    i++
+                }
+            }else if (node.status.length===1){
+                if(changeOptionsToStatus[node.status[0]] === false){
+                    nodes.splice(i,1)
+                }else{
+                    i++
+                }
+            }else{
+                if(changeOptionsToStatus['stableNode']){
+                    i++
+                }else{
+                    nodes.splice(i,1)
+                }
+            }
+        }else{
+            //无状态，即是stabledNode
+            if(changeOptionsToStatus['stableNode']){
+                i++
+            }else{
+                nodes.splice(i,1)
+            }
+        }
+    }
+    // 过滤总图的连接
+    for(let i = 0;i<links.length;){
+        let link = links[i]
+        if(link.type==='grid-line'){
+            i++
+            continue
+        }
+        if(Array.isArray(link.status)){
+            if(link.status.length >=2){
+                for(let j =0;j<link.status.length;){
+                    if(changeOptionsToStatus[link.status[j]]===false){
+                        link.status.splice(j,1)
+                    }else{
+                        j++
+                    }
+                }
+                if(link.status.length===0){
+                    //删除掉该节点
+                    links.splice(i,1)
+                }else{
+                    i++
+                }
+            }else if (link.status.length===1){
+                if(changeOptionsToStatus[link.status[0]] === false){
+                    links.splice(i,1)
+                }else{
+                    i++
+                }
+            }else{
+                if(changeOptionsToStatus['stableLink']){
+                    i++
+                }else{
+                    links.splice(i,1)
+                }
+            }
+        }else{
+            //无状态，即是stabledNode
+            if(changeOptionsToStatus['stableLink']){
+                i++
+            }else{
+                links.splice(i,1)
+            }
+        }
+    }
+
+    // 过滤分帧图的节点和链接
+    Object.values(timeGraphs).forEach((graph) => {
+        for(let nodeKey in graph.nodes){
+            let node = graph.nodes[nodeKey]
+            if(Array.isArray(node.status)){
+                if(node.status.length >=2){
+                    for(let j =0;j<node.status.length;){
+                        if(changeOptionsToStatus[node.status[j]]===false){
+                            node.status.splice(j,1)
+                        }else{
+                            j++
+                        }
+                    }
+                    if(node.status.length===0){
+                        //删除掉该节点
+                        delete graph.nodes[nodeKey]
+                    }
+                }else if (node.status.length===1){
+                    if(changeOptionsToStatus[node.status[0]] === false){
+                        delete graph.nodes[nodeKey]
+                    }
+                }else{
+                    if(!changeOptionsToStatus['stableNode']){
+                        delete graph.nodes[nodeKey]
+                    }
+                }
+            }else{
+                //无状态，即是stabledNode
+                if(!changeOptionsToStatus['stableNode']){
+                    delete graph.nodes[nodeKey]
+                }
+            }
+        }
+        for(let linkKey in graph.links){
+            let link = graph.links[linkKey]
+            if(link.type==='grid-line'){
+                continue
+            }
+            if(Array.isArray(link.status)){
+                if(link.status.length >=2){
+                    for(let j =0;j<link.status.length;){
+                        if(changeOptionsToStatus[link.status[j]]===false){
+                            link.status.splice(j,1)
+                        }else{
+                            j++
+                        }
+                    }
+                    if(link.status.length===0){
+                        //删除掉该节点
+                        delete graph.links[linkKey]
+                    }
+                }else if (link.status.length===1){
+                    if(changeOptionsToStatus[link.status[0]] === false){
+                        delete graph.links[linkKey]
+                    }
+                }else{
+                    if(!changeOptionsToStatus['stableLink']){
+                        delete graph.links[linkKey]
+                    }
+                }
+            }else{
+                //无状态，即是stabledNode
+                if(!changeOptionsToStatus['stableLink']){
+                    delete graph.links[linkKey]
+                }
+            }
+        }
+        
+    })
+
+
+}
 export const compareTwoFrameAboutAttr = (localFrame, compareFrame) => {
     const compareNodesDegree = {}
     for (let nodeId in compareFrame.nodes) {

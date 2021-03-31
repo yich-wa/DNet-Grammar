@@ -112,16 +112,18 @@ class TaskPanel extends React.Component {
 
     handleChangeCheckChange = (list) => {
         // this.handleComparisonChange({ chooseTypes: list })
-        this.setState({ changeList: list })
+        // this.setState({ changeList: list })
         // this.setState({ changeIndeterminate: !!list.length && list.length < TASK_CHANGE_TYPES.length })
-        this.setState({ changeCheckAll: list.length === TASK_CHANGE_TYPES.length })
+        // this.setState({ changeCheckAll: list.length === TASK_CHANGE_TYPES.length })
+        this.handleTaskPanelChange('change', list)
     }
     handleAllChangeCheckChange = (e) => {
         // this.setState({ changeIndeterminate: false })
-        this.setState({ changeCheckAll: e.target.checked })
-        if (e.target.checked) {
-            this.setState({ changeList: [...TASK_CHANGE_TYPES] })
-        }
+        // this.setState({ changeCheckAll: e.target.checked })
+        // if (e.target.checked) {
+        //     this.setState({ changeList: [...TASK_CHANGE_TYPES] })
+        // }
+        this.handleTaskPanelChange('change', [...TASK_CHANGE_TYPES])
     }
 
     handleComparisonChange = (value) => {
@@ -148,73 +150,49 @@ class TaskPanel extends React.Component {
     }
 
     handleTaskPatternSelect = (value) => {
-        this.setState({
-            taskPattern: value
-        })
         let tempChangeList
         switch (value) {
             case 'graph':
                 this.handleTaskPanelChange('taskType', 'none')
-                tempChangeList = PATTERN_TO_CHANGE['graph']
-                this.setState({
-                    changeList: tempChangeList,
-                    changeCheckAll: tempChangeList.length === 8
-                })
+                this.handleTaskPanelChange('pattern', 'graph')
+                this.handleTaskPanelChange('change', [...PATTERN_TO_CHANGE['graph']])
                 break
             case 'compare-structure':
                 this.handleTaskPanelChange('taskType', 'comparison')
                 this.handleTaskPanelChange('basedType', 'structure')
-                tempChangeList = PATTERN_TO_CHANGE['compare-structure']
-                this.setState({
-                    changeList: tempChangeList,
-                    changeCheckAll: tempChangeList.length === 8
-                })
+                this.handleTaskPanelChange('pattern', 'compare-structure')
+                this.handleTaskPanelChange('change', [...PATTERN_TO_CHANGE['compare-structure']])
                 break
             case 'shortest-path':
                 this.handleTaskPanelChange('taskType', 'find')
                 this.handleTaskPanelChange('basedType', 'structure')
-                this.handleSelectChange('shortest-path', 'structure', 'find')
-                tempChangeList = PATTERN_TO_CHANGE['shortest-path']
-                this.setState({
-                    changeList: tempChangeList,
-                    changeCheckAll: tempChangeList.length === 8
-                })
+                this.handleTaskPanelChange('pattern', 'shortest-path')
+                this.handleTaskPanelChange('change', [...PATTERN_TO_CHANGE['shortest-path']])
                 break
             case 'dumb-bell':
                 this.handleTaskPanelChange('taskType', 'find')
                 this.handleTaskPanelChange('basedType', 'structure')
                 this.handleSelectChange('dumb-bell', 'structure', 'find')
-                tempChangeList = PATTERN_TO_CHANGE['dumb-bell']
-                this.setState({
-                    changeList: tempChangeList,
-                    changeCheckAll: tempChangeList.length === 8
-                })
+                this.handleTaskPanelChange('pattern', 'dumb-bell')
+                this.handleTaskPanelChange('change', [...PATTERN_TO_CHANGE['dumb-bell']])
                 break
             case 'compare-degree':
                 this.handleTaskPanelChange('taskType', 'comparison')
                 this.handleTaskPanelChange('basedType', 'attr')
-                tempChangeList = PATTERN_TO_CHANGE['compare-degree']
-                this.setState({
-                    changeList: tempChangeList,
-                    changeCheckAll: tempChangeList.length === 8
-                })
+                this.handleTaskPanelChange('pattern', 'compare-degree')
+                this.handleTaskPanelChange('change', [...PATTERN_TO_CHANGE['compare-degree']])
                 break
             case 'find-degree':
                 this.handleTaskPanelChange('taskType', 'find')
                 this.handleTaskPanelChange('basedType', 'attr')
-                tempChangeList = PATTERN_TO_CHANGE['find-degree']
-                this.setState({
-                    changeList: tempChangeList,
-                    changeCheckAll: tempChangeList.length === 8
-                })
+                this.handleTaskPanelChange('pattern', 'find-degree')
+                this.handleTaskPanelChange('change', [...PATTERN_TO_CHANGE['find-degree']])
                 break
             default:
                 this.handleTaskPanelChange('taskType', 'none')
                 tempChangeList = PATTERN_TO_CHANGE['graph']
-                this.setState({
-                    changeList: tempChangeList,
-                    changeCheckAll: tempChangeList.length === 8
-                })
+                this.handleTaskPanelChange('pattern', 'graph')
+                this.handleTaskPanelChange('change', [...PATTERN_TO_CHANGE['graph']])
         }
     }
     handleTaskChangeSelect = (value) => {
@@ -227,7 +205,7 @@ class TaskPanel extends React.Component {
     }
 
     render() {
-        const { comparison, find, taskType, basedType } = this.props.options
+        const { comparison, find, taskType, basedType, pattern, change} = this.props.options
         const patternAndChange = getConfigPatternChange(this.props.options)
         const {
             chooseItem,
@@ -254,7 +232,7 @@ class TaskPanel extends React.Component {
                     <div className="change-option-item">
                         {/* <div>Entity:</div> */}
                         <Select
-                            value={patternAndChange.pattern}
+                            value={pattern}
                             style={{ width: 260 }}
                             size="small"
                             onChange={(value) => this.handleTaskPatternSelect(value)}
@@ -268,41 +246,35 @@ class TaskPanel extends React.Component {
                             })}
                         </Select>
                     </div>
-                    {patternAndChange.pattern === 'shortest-path' ? (
+                    {pattern === 'shortest-path' ? (
                         <>
                             <div className="change-option-item">
-                                <div>Relation:</div>
+                                <div>Start:</div>
                                 <Select
-                                    value={find.relation}
+                                    value={'A'}
                                     style={{ width: TPIW }}
                                     size="small"
-                                    onChange={(value) =>
-                                        this.handleSelectChange(value, 'relation', 'find')
-                                    }
                                 >
-                                    {TASK_FIND_RELATION.map((v) => {
-                                        return (
-                                            <Option key={v} value={v}>
-                                                {v}
-                                            </Option>
-                                        )
-                                    })}
+                                    <Option key={'A'} value={'A'}>
+                                        {'A'}
+                                    </Option>
                                 </Select>
                             </div>
                             <div className="change-option-item">
-                                <div>Value:</div>
-                                <InputNumber
-                                    size="small"
-                                    min={0}
-                                    max={100}
-                                    value={find.value}
-                                    onChange={(e) => this.handleFindChange({ value: Number(e) })}
+                                <div>End:</div>
+                                <Select
+                                    value={'F'}
                                     style={{ width: TPIW }}
-                                />
+                                    size="small"
+                                >
+                                    <Option key={'F'} value={'F'}>
+                                        {'F'}
+                                    </Option>
+                                </Select>
                             </div>
                         </>
                     ) : null}
-                    {patternAndChange.pattern === 'find-degree' ? (
+                    {pattern === 'find-degree' ? (
                         <>
                             <div className="change-option-item">
                                 <div>Relation:</div>
@@ -377,7 +349,7 @@ class TaskPanel extends React.Component {
                                         indeterminate={false}
                                         onChange={this.handleAllChangeCheckChange}
                                         checked={
-                                            PATTERN_TO_CHANGE[patternAndChange.pattern].length === 8
+                                            change.length === TASK_CHANGE_TYPES.length
                                         }
                                     >
                                         all
@@ -390,10 +362,10 @@ class TaskPanel extends React.Component {
                                         paddingLeft: '10px'
                                     }}
                                     // value={this.state.changeList}
-                                    value={PATTERN_TO_CHANGE[patternAndChange.pattern]}
+                                    value={change}
                                     onChange={this.handleChangeCheckChange}
                                 >
-                                    {[0, 2, 4, 6].map((v) => {
+                                    {[0, 2, 4].map((v) => {
                                         return (
                                             <Row
                                                 style={{

@@ -30,8 +30,8 @@ export const TASK_FIND_ATTR = ['degree']
 export const TASK_FIND_STRUCTURE = ['shortest-path','dumb-bell']
 export const TASK_FIND_RELATION = ['>=','=','<=']
 
-export const TASK_PATTERN_TYPES = ['graph', 'compare-structure','shortest-path', 'frequent-structure','dumb-bell', 'compare-degree', 'find-degree', 'anomaly-detection']
-export const TASK_CHANGE_TYPES = ['appeared','disappeared','unchanged', 'appearedNode', 'appearedEdge', 'disappearedNode', 'disappearedEdge','unchangedNode']
+export const TASK_PATTERN_TYPES = ['graph','shortest-path', 'frequent-structure','dumb-bell', 'compare-degree', 'find-degree', 'anomaly-detection']
+export const TASK_CHANGE_TYPES = ['appearedNode', 'appearedEdge', 'disappearedNode', 'disappearedEdge','unchangedNode','unchangedEdge']
 
 export const TIME_TIMELINE_ELEMENT = ['node', 'link', 'all']
 export const TIME_CHART_TYPE = ['line', 'bar']
@@ -52,12 +52,11 @@ export const ROW_BUTTON_STYLE = {
 }
 
 export const PATTERN_TO_CHANGE = {
-  'graph': ['unchanged','appeared'],
-  'compare-structure': [...TASK_CHANGE_TYPES],
-  'shortest-path': ['unchanged','appeared'],
-  'dumb-bell': ['unchanged','appeared'],
-  'compare-degree': [...TASK_CHANGE_TYPES],
-  'find-degree': ['unchanged','appeared']
+  'graph': [...TASK_CHANGE_TYPES],
+  'shortest-path': ['unchangedNode','unchangedEdge','appearedNode','appearedEdge'],
+  'dumb-bell': ['unchangedNode','unchangedEdge','appearedNode','appearedEdge'],
+  'compare-degree': ['unchangedNode','unchangedEdge','appearedNode','disappearedNode'],
+  'find-degree': ['unchangedNode','unchangedEdge','appearedNode']
 }
 
 export const TIME_BUTTON_STYLE = {

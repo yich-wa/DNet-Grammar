@@ -70,6 +70,7 @@ class GraphPanel extends React.Component {
                     <div className="change-option-item">
                         <div>GraphLayout:</div>
                         <Select
+                            size="small"
                             value={this.props.options.layout.chooseType}
                             style={{ width: 125 }}
                             onChange={this.handleLayoutTypeChange}
