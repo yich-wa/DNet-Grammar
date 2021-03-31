@@ -20,7 +20,6 @@ export default function CombinePanel(props) {
                 className="cbpl-content-container simple_scrollbar"
             >
                 <div>
-                    <TaskPanel/>
                     <GraphPanel/>
                 </div>
                 <TimePanel/>

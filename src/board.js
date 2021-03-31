@@ -1,7 +1,7 @@
 import React from 'react'
 import DataPanel from './components/dataPanel/dataPanel.js'
 import Preview from './components/preview/preview.js'
-import GraphPanel from './components/graphPanel/graphPanel.js'
+import TaskPanel from './components/taskPanel/taskPanel.js'
 import GrammarPanel from './components/grammarPanel/grammarPanel.js'
 import ExampleBoard from './components/exampleBoard/exampleBoard.js'
 import TemplatePanel from './components/templatePanel/templatePanel.js'
@@ -65,7 +65,7 @@ class Board extends React.Component {
                     <div className="row">
                         <div className="col">
                             <DataPanel />
-                            <GrammarPanel/>
+                            <TaskPanel/>
                         </div>
                         <div className="col">
                             <CombinePanel/>

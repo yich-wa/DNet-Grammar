@@ -1,6 +1,6 @@
 import React from 'react'
 import SampleItem from '../sampleItem/sampleItem.js'
-import { Radio, Select, Collapse, Checkbox, Col, Row } from 'antd'
+import { Radio, Select, Collapse, Checkbox, Col, Row, InputNumber } from 'antd'
 import NodeLinkStylePanel from '../nodeLinkStylePanel/nodeLinkStylePanel.js'
 import {
     TIME_PANEL_INPUT_WIDTH as TPIW,
@@ -71,7 +71,7 @@ class TaskPanel extends React.Component {
             changeCheckAll: true,
             changeList: [...TASK_CHANGE_TYPES],
             taskPattern: 'graph',
-            taskChange :'all'
+            taskChange: 'all'
         }
     }
     handleOptionChange = (value) => {
@@ -119,7 +119,7 @@ class TaskPanel extends React.Component {
     handleAllChangeCheckChange = (e) => {
         // this.setState({ changeIndeterminate: false })
         this.setState({ changeCheckAll: e.target.checked })
-        if(e.target.checked){
+        if (e.target.checked) {
             this.setState({ changeList: [...TASK_CHANGE_TYPES] })
         }
     }
@@ -147,55 +147,74 @@ class TaskPanel extends React.Component {
         })
     }
 
-
-
     handleTaskPatternSelect = (value) => {
         this.setState({
             taskPattern: value
         })
         let tempChangeList
-        switch(value){
+        switch (value) {
             case 'graph':
                 this.handleTaskPanelChange('taskType', 'none')
                 tempChangeList = PATTERN_TO_CHANGE['graph']
-                this.setState({changeList:tempChangeList, changeCheckAll: tempChangeList.length===8})
+                this.setState({
+                    changeList: tempChangeList,
+                    changeCheckAll: tempChangeList.length === 8
+                })
                 break
             case 'compare-structure':
                 this.handleTaskPanelChange('taskType', 'comparison')
                 this.handleTaskPanelChange('basedType', 'structure')
                 tempChangeList = PATTERN_TO_CHANGE['compare-structure']
-                this.setState({changeList: tempChangeList, changeCheckAll: tempChangeList.length===8})
+                this.setState({
+                    changeList: tempChangeList,
+                    changeCheckAll: tempChangeList.length === 8
+                })
                 break
             case 'shortest-path':
                 this.handleTaskPanelChange('taskType', 'find')
                 this.handleTaskPanelChange('basedType', 'structure')
                 this.handleSelectChange('shortest-path', 'structure', 'find')
                 tempChangeList = PATTERN_TO_CHANGE['shortest-path']
-                this.setState({changeList: tempChangeList, changeCheckAll: tempChangeList.length===8})
+                this.setState({
+                    changeList: tempChangeList,
+                    changeCheckAll: tempChangeList.length === 8
+                })
                 break
             case 'dumb-bell':
                 this.handleTaskPanelChange('taskType', 'find')
                 this.handleTaskPanelChange('basedType', 'structure')
                 this.handleSelectChange('dumb-bell', 'structure', 'find')
                 tempChangeList = PATTERN_TO_CHANGE['dumb-bell']
-                this.setState({changeList: tempChangeList, changeCheckAll: tempChangeList.length===8})
+                this.setState({
+                    changeList: tempChangeList,
+                    changeCheckAll: tempChangeList.length === 8
+                })
                 break
             case 'compare-degree':
                 this.handleTaskPanelChange('taskType', 'comparison')
                 this.handleTaskPanelChange('basedType', 'attr')
                 tempChangeList = PATTERN_TO_CHANGE['compare-degree']
-                this.setState({changeList: tempChangeList, changeCheckAll: tempChangeList.length===8})
+                this.setState({
+                    changeList: tempChangeList,
+                    changeCheckAll: tempChangeList.length === 8
+                })
                 break
             case 'find-degree':
                 this.handleTaskPanelChange('taskType', 'find')
                 this.handleTaskPanelChange('basedType', 'attr')
                 tempChangeList = PATTERN_TO_CHANGE['find-degree']
-                this.setState({changeList:tempChangeList, changeCheckAll: tempChangeList.length===8})
+                this.setState({
+                    changeList: tempChangeList,
+                    changeCheckAll: tempChangeList.length === 8
+                })
                 break
             default:
                 this.handleTaskPanelChange('taskType', 'none')
                 tempChangeList = PATTERN_TO_CHANGE['graph']
-                this.setState({changeList:tempChangeList, changeCheckAll: tempChangeList.length===8})
+                this.setState({
+                    changeList: tempChangeList,
+                    changeCheckAll: tempChangeList.length === 8
+                })
         }
     }
     handleTaskChangeSelect = (value) => {
@@ -226,16 +245,17 @@ class TaskPanel extends React.Component {
         changeKey = changeKey.join('')
         const changeOptions = comparison[changeKey]
         return (
-            <div className="Comparison-box combine-inner-border">
-                <div className="combine-inner-title">
-                    &nbsp;Pattern and Change
-                </div>
+            <div className="Comparison-box">
+                <div className="sub-title">&nbsp;Entity and Change</div>
                 <div className="encoding-table-container">
+                    <div className="change-option-title">
+                        <div className="divider">Entity</div>
+                    </div>
                     <div className="change-option-item">
-                        <div>Pattern:</div>
+                        {/* <div>Entity:</div> */}
                         <Select
                             value={patternAndChange.pattern}
-                            style={{ width: 125 }}
+                            style={{ width: 260 }}
                             size="small"
                             onChange={(value) => this.handleTaskPatternSelect(value)}
                         >
@@ -248,6 +268,74 @@ class TaskPanel extends React.Component {
                             })}
                         </Select>
                     </div>
+                    {patternAndChange.pattern === 'shortest-path' ? (
+                        <>
+                            <div className="change-option-item">
+                                <div>Relation:</div>
+                                <Select
+                                    value={find.relation}
+                                    style={{ width: TPIW }}
+                                    size="small"
+                                    onChange={(value) =>
+                                        this.handleSelectChange(value, 'relation', 'find')
+                                    }
+                                >
+                                    {TASK_FIND_RELATION.map((v) => {
+                                        return (
+                                            <Option key={v} value={v}>
+                                                {v}
+                                            </Option>
+                                        )
+                                    })}
+                                </Select>
+                            </div>
+                            <div className="change-option-item">
+                                <div>Value:</div>
+                                <InputNumber
+                                    size="small"
+                                    min={0}
+                                    max={100}
+                                    value={find.value}
+                                    onChange={(e) => this.handleFindChange({ value: Number(e) })}
+                                    style={{ width: TPIW }}
+                                />
+                            </div>
+                        </>
+                    ) : null}
+                    {patternAndChange.pattern === 'find-degree' ? (
+                        <>
+                            <div className="change-option-item">
+                                <div>Relation:</div>
+                                <Select
+                                    value={find.relation}
+                                    style={{ width: TPIW }}
+                                    size="small"
+                                    onChange={(value) =>
+                                        this.handleSelectChange(value, 'relation', 'find')
+                                    }
+                                >
+                                    {TASK_FIND_RELATION.map((v) => {
+                                        return (
+                                            <Option key={v} value={v}>
+                                                {v}
+                                            </Option>
+                                        )
+                                    })}
+                                </Select>
+                            </div>
+                            <div className="change-option-item">
+                                <div>Value:</div>
+                                <InputNumber
+                                    size="small"
+                                    min={0}
+                                    max={100}
+                                    value={find.value}
+                                    onChange={(e) => this.handleFindChange({ value: Number(e) })}
+                                    style={{ width: TPIW }}
+                                />
+                            </div>
+                        </>
+                    ) : null}
                     {/* <div className="change-option-item">
                         <div>Change:</div>
                         <Select
@@ -264,6 +352,9 @@ class TaskPanel extends React.Component {
                             })}
                         </Select>
                     </div> */}
+                    <div className="change-option-title">
+                        <div className="divider">Change</div>
+                    </div>
                     <div className="change-option-item">
                         <Collapse
                             expandIconPosition={'right'}
@@ -285,7 +376,9 @@ class TaskPanel extends React.Component {
                                     <Checkbox
                                         indeterminate={false}
                                         onChange={this.handleAllChangeCheckChange}
-                                        checked={PATTERN_TO_CHANGE[patternAndChange.pattern].length===8}
+                                        checked={
+                                            PATTERN_TO_CHANGE[patternAndChange.pattern].length === 8
+                                        }
                                     >
                                         all
                                     </Checkbox>
@@ -323,10 +416,13 @@ class TaskPanel extends React.Component {
                                                     style={{
                                                         width: '50%',
                                                         display: 'flex',
-                                                        flexDirection: 'flex-start',
+                                                        flexDirection: 'flex-start'
                                                     }}
                                                 >
-                                                    <Checkbox style={{ fontSize: '10px'}}value={TASK_CHANGE_TYPES[v + 1]}>
+                                                    <Checkbox
+                                                        style={{ fontSize: '10px' }}
+                                                        value={TASK_CHANGE_TYPES[v + 1]}
+                                                    >
                                                         {TASK_CHANGE_TYPES[v + 1]}
                                                     </Checkbox>
                                                 </Col>
