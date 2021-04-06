@@ -15,7 +15,7 @@ function Preview(props) {
             <div className="sub-title">
                 &nbsp;Preview
                 <svg className="icon" aria-hidden="true">
-                    <use xlinkHref="#icon-play"></use>
+                    <use xlinkHref="#icon-download"></use>
                 </svg>
             </div>
             <div

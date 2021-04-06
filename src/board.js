@@ -38,7 +38,7 @@ class Board extends React.Component {
                         src={graphSvg}
                     /> */}
                     <div className="window-header-text">
-                        <div className="title"> <span className="bold-font">GoGraph Editor</span> </div>
+                        <div className="title"> <span className="bold-font">Nuwa Editor</span> </div>
                         {/* <div
                             className={`header-sub-title ${
                                 this.state.board === 'system' ? 'header-sub-choose' : ''

@@ -34,7 +34,8 @@ const dataset = [
     },
     {
         dataName: 'DynamicData-4',
-        description: getDataDescription(flowData.default.graphs,'MdsOne'),
+        // description: getDataDescription(flowData.default.graphs,'MdsOne'),
+        description: '#Times: 200; #Nodes: 50; #Links: 15;',
         // description: '展示mds一维降维数据',
         data: flowData.default
     },
@@ -55,7 +56,7 @@ const dataset = [
 function getDataDescription(data,tag){
     const result = getDataInfo(data)
     // const description = `Times: ${result.times}; Nodes: ${result.nodes}; Links: ${result.links}; Tag:${tag}`
-    const description = `Times: ${result.times}; Nodes: ${result.nodes}; Links: ${result.links};`
+    const description = `#Times: ${result.times}; #Nodes: ${result.nodes}; #Links: ${result.links};`
     return description
 }
 
@@ -211,9 +212,6 @@ class DataPanel extends React.Component {
                     {' '}
                     &nbsp; Data
                     <svg className="icon" onClick={this.handleChangeData} aria-hidden="true">
-                        <use xlinkHref="#icon-add"></use>
-                    </svg>
-                    <svg className="icon" aria-hidden="true">
                         <use xlinkHref="#icon-center"></use>
                     </svg>
                 </div>
@@ -330,12 +328,11 @@ class DataPanel extends React.Component {
                     </div>
                 ) : null}
                 <Modal
-                    title="Change Dataset"
+                    title="Dataset"
                     visible={this.state.modalVisible}
                     onCancel={this.handleCancel}
                     footer={[]}
                 >
-                    <p>Explore a Sample Dataset</p>
                     <List
                         itemLayout="horizontal"
                         dataSource={dataset}
@@ -367,7 +364,7 @@ class DataPanel extends React.Component {
                             disabled={this.state.selected === -1 ? true : false}
                             onClick={this.handleCertainButton}
                         >
-                            Certain
+                            Select
                         </Button>
                     </div>
                 </Modal>

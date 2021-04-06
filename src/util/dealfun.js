@@ -1567,6 +1567,15 @@ export const filterDataFromChange = (timeGraphs, sumGraphs, configs) =>{
     if(change.length === TASK_CHANGE_TYPES.length){
         return
     }
+    // 没有change时，啥都不绘制
+    if(change.length === 0){
+        sumGraphs.nodes = []
+        sumGraphs.links = []
+        for(let graph in timeGraphs){
+            delete(timeGraphs[graph])
+        }
+        return 
+    }
 
     const changeOptionsToStatus = {
         'appearNode':false,
