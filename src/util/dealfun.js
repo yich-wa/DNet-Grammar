@@ -1604,6 +1604,8 @@ export const filterDataFromChange = (timeGraphs, sumGraphs, configs) =>{
             case 'disappearedEdge':
                 changeOptionsToStatus['disappearLink'] = true
                 break  
+            default:
+                break
         }
     }
     // console.log("----change--changeOptionsToStatus",change,changeOptionsToStatus)
