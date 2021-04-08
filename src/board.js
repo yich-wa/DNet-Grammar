@@ -5,7 +5,6 @@ import GrammarPanel from './components/grammarPanel/grammarPanel.js'
 import ExampleBoard from './components/exampleBoard/exampleBoard.js'
 import TemplatePanel from './components/templatePanel/templatePanel.js'
 import CombinePanel from './components/combinePanel/combinePanel.js'
-import { COMPARISON_CONFIG } from './util/defaultConfig.js'
 import graphSvg from './assets/graphIcon.svg'
 import { connect } from "react-redux"
 import { 
@@ -34,6 +33,7 @@ class Board extends React.Component {
                 <div className="window-header">
                     <img 
                         className="title-graph-svg" 
+                        alt={'graph'}                
                         src={graphSvg}
                     />
                     <div className="window-header-text">

@@ -2,7 +2,7 @@ import * as d3 from 'd3'
 
 // 返回值是 {subgraphs, sumgraphs}
 export function dealData(originData, width, height) {
-    console.log('dealData---', width, height)
+    // console.log('dealData---', width, height)
     const sumGraphs = getLayout(originData, width, height)
     const subGraphs = assignPos(originData, sumGraphs)
     return { sumGraphs, subGraphs }

@@ -8,13 +8,10 @@ import {
     KEYFRAM_OPTIONS,
     TASK_FIND_ATTR,
     TASK_FIND_RELATION,
-    TASK_FIND_STRUCTURE,
-    TASK_PATTERN_TYPES,
     TASK_CHANGE_TYPES,
     PATTERN_TO_CHANGE
 } from '../../util/const'
 import { COMPARISON_CONFIG } from '../../util/defaultConfig.js'
-import { getConfigPatternChange } from '../../util/dnetChart.js'
 import './comparisonPanel.css'
 import { connect } from 'react-redux'
 import { modifyConfig } from '../../redux/config.redux.js'
@@ -132,7 +129,6 @@ class TaskPanel extends React.Component {
     }
 
     handleTaskPatternSelect = (value) => {
-        let tempChangeList
         switch (value) {
             case 'graph':
                 this.handleTaskPanelChange('taskType', 'none')
@@ -172,7 +168,6 @@ class TaskPanel extends React.Component {
                 break
             default:
                 this.handleTaskPanelChange('taskType', 'none')
-                tempChangeList = PATTERN_TO_CHANGE['graph']
                 this.handleTaskPanelChange('pattern', 'graph')
                 this.handleTaskPanelChange('change', [...PATTERN_TO_CHANGE['graph']])
         }
@@ -184,7 +179,6 @@ class TaskPanel extends React.Component {
     }
     changeTaskConfig = (value) => {
         this.props.modifyConfig({ key: 'task', value })
-        console.log("changeTaskConfig", value)
     }
 
     render() {

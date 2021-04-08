@@ -63,7 +63,6 @@ class GraphPanel extends React.Component {
     render() {
         const optionKey = this.state.chooseItem === 'Node' ? 'nodeStyle' : 'linkStyle'
         const changeOptions = this.props.options[optionKey]
-        const linkOptions = this.props.options['linkStyle']
         return (
             <div className="basic-box combine-inner-border">
                 <div className="combine-inner-title">&nbsp;Graph</div>

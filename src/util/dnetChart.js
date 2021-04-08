@@ -3,7 +3,6 @@ import { defaultConfigs,  COMPARISON_CONFIG} from './defaultConfig'
 import * as _lodash from 'lodash'
 import {PATTERN_TO_CHANGE} from './const.js'
 import assign from 'assign-deep'
-import { path } from 'd3'
 
 
 const TIME_CONFIG = ['timeLine', 'animation', 'color', 'markLine', 'insert']
@@ -459,7 +458,7 @@ export function getRenderType(arr) {
 // 检验输入的参数，确保基础config没有问题
 export function composeConfig(configItem) {
     const config = deepClone(defaultConfigs)
-    if (!configItem.time || Object.prototype.toString.call(configItem.time) != '[object Array]') {
+    if (!configItem.time || Object.prototype.toString.call(configItem.time) !== '[object Array]') {
         config.time.chooseTypes = ['position']
     } else {
         config.time.chooseTypes = configItem.time.filter((item) => TIME_CONFIG.indexOf(item) > -1)
@@ -788,7 +787,7 @@ export function getHybridPathData(source, target) {
     const flag = x1 < x2 ? 1 : -1
     const flag2 = x1 < x2 ? 1 : 0
     const r = (Math.sqrt(Math.pow(y2 - y1, 2) + Math.pow(x2 - x1, 2)) * Math.sqrt(2)) / 2
-    if (r == 0) {
+    if (r === 0) {
         return { firstData: null, secondData: null }
     }
     let mx = (x1 + x2) / 2 + (flag * (1 - Math.sqrt(2) / 2) * r * (y2 - y1)) / (Math.sqrt(2) * r)
@@ -797,37 +796,6 @@ export function getHybridPathData(source, target) {
     const secondData = `M ${mx},${my} L ${x2},${y2}`
     // console.log("firstData","secondData",firstData,secondData)
     return { firstData, secondData }
-}
-function getConfigEncoding(config){
-    const encoding = {}
-    const {time, graph} = config
-    if(time.chooseTypes.indexOf('timeLine')>-1){
-        if(time.timeLine.type==='linear'){
-            encoding.timeLayout = 'juxtaposed'
-        }else{
-            encoding.timeLayout = time.timeLine.type
-        }
-    }else{
-        encoding.timeLayout = 'merged'
-    }
-    encoding.graphLayout = graph.layout.chooseType
-    if(time.chooseTypes.indexOf('animation')>-1){
-        encoding.animation = `speed-${time.animation.speed}`
-    }
-    if(time.chooseTypes.indexOf(''))
-    if(time.chooseTypes.indexOf('markLine')>-1){
-        encoding.markLine = time.markLine.shape
-    }
-    if(time.chooseTypes.indexOf('color')>-1){
-        encoding.color = `StartColor: ${time.color.startColor}, EndColor:${time.color.endColor}`
-    }
-    if(time.chooseTypes.indexOf('chart')>-1){
-        encoding.chart = `${time.chart.type}Chart`
-    }
-    if(time.chooseTypes.indexOf('insert')>-1){
-        encoding.insert = `${time.insert.position}-Position`
-    }
-    return encoding
 }
 
 export function getConfigPatternChange(task){
@@ -906,7 +874,7 @@ export function getDividedArcPathData(source, target) {
     const flag = x1 < x2 ? 1 : -1
     const flag2 = x1 < x2 ? 1 : 0
     const r = (Math.sqrt(Math.pow(y2 - y1, 2) + Math.pow(x2 - x1, 2)) * Math.sqrt(2)) / 2
-    if (r == 0) {
+    if (r === 0) {
         return { firstData: null, secondData: null }
     }
     let mx = (x1 + x2) / 2 + (flag * (1 - Math.sqrt(2) / 2) * r * (y2 - y1)) / (Math.sqrt(2) * r)

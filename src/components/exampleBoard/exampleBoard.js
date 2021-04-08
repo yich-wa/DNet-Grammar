@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useState } from 'react'
 import Grammar from '../../components/grammar.js'
 import Preview from '../../components/preview/preview.js'
 import * as testData from '../../data/import/test1.json'

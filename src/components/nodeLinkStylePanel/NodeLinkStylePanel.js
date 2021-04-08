@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Radio, Select, Input, Collapse, InputNumber } from 'antd'
+import { Select, Input, Collapse, InputNumber } from 'antd'
 import { ChromePicker } from 'react-color'
 import './nodeLinkStylePanel.css'
 

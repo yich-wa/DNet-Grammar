@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import ReactJson from 'react-json-view'
 import FileSaver from 'file-saver'
 import { REACT_JSON_OPTIONS } from '../../util/const'
 import { connect } from 'react-redux'
 import { update } from '../../redux/config.redux.js'
-import * as _ from 'lodash'
+// import * as _ from 'lodash'                                                                                                                               
 import './grammarPanel.css'
 import { getSimpleGrammar } from '../../util/dnetChart.js'
 

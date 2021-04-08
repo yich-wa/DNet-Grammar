@@ -5,7 +5,6 @@ import { getInsertPosition } from './dnetChart.js'
 import * as _ from 'lodash'
 import G6 from '@antv/g6'
 import {TASK_CHANGE_TYPES} from './const'
-import { dsvFormat } from 'd3'
 export const _intersection = (setA, setB) => {
     let intersection = new Set(setA)
     for (let elem of setA) {
@@ -84,12 +83,12 @@ export const getTimeId = (graphs, times) => {
                 source = link.target
                 target = link.source
             }
-            if (node2degree[source] == undefined) {
+            if (node2degree[source] === undefined) {
                 node2degree[source] = 1
             } else {
                 node2degree[source]++
             }
-            if (node2degree[target] == undefined) {
+            if (node2degree[target] === undefined) {
                 node2degree[target] = 1
             } else {
                 node2degree[target]++
@@ -357,7 +356,7 @@ export const dagreLayout = (sumGraphs, configs) => {
     })
     graph.data(data)
     graph.render()
-    const { nodes: rNodes, edges: rLinks } = graph.cfg.data
+    const { nodes: rNodes } = graph.cfg.data
     let nodesObj = {}
     nodes.forEach((node, i) => {
         node.x = rNodes[i].x
@@ -419,7 +418,7 @@ export const mdsLayout = (sumGraphs, configs) => {
         nodes: gNodes,
         edges: gEdges
     }
-    const { eachWidth, eachHeight, margin } = configs.graph
+    const { eachWidth, eachHeight } = configs.graph
     var graph = new G6.Graph({
         container: 'g6-graph-container',
         width: eachWidth,
@@ -432,7 +431,7 @@ export const mdsLayout = (sumGraphs, configs) => {
     })
     graph.data(data)
     graph.render()
-    const { nodes: rNodes, edges: rLinks } = graph.cfg.data
+    const { nodes: rNodes} = graph.cfg.data
     let nodesObj = {}
     nodes.forEach((node, i) => {
         node.x = rNodes[i].x
@@ -463,7 +462,7 @@ export const gridLayout = (sumGraphs, configs) => {
         nodes: gNodes,
         edges: gEdges
     }
-    const { eachWidth, eachHeight, margin, layout } = configs.graph
+    const { eachWidth, eachHeight, layout } = configs.graph
     var graph = new G6.Graph({
         container: 'g6-graph-container',
         width: eachWidth,
@@ -480,7 +479,7 @@ export const gridLayout = (sumGraphs, configs) => {
     })
     graph.data(data)
     graph.render()
-    const { nodes: rNodes, edges: rLinks } = graph.cfg.data
+    const { nodes: rNodes } = graph.cfg.data
     let nodesObj = {}
     nodes.forEach((node, i) => {
         node.x = rNodes[i].x
@@ -511,7 +510,7 @@ export const circularLayout = (sumGraphs, configs) => {
         nodes: gNodes,
         edges: gEdges
     }
-    const { eachWidth, eachHeight, margin } = configs.graph
+    const { eachWidth, eachHeight } = configs.graph
     const radius = Math.min(eachWidth, eachHeight) / 2
     var graph = new G6.Graph({
         container: 'g6-graph-container',
@@ -527,7 +526,7 @@ export const circularLayout = (sumGraphs, configs) => {
     })
     graph.data(data)
     graph.render()
-    const { nodes: rNodes, edges: rLinks } = graph.cfg.data
+    const { nodes: rNodes } = graph.cfg.data
     let nodesObj = {}
     nodes.forEach((node, i) => {
         node.x = rNodes[i].x
@@ -739,7 +738,7 @@ export const getTranslateMap = (configs, len) => {
     if (configs.time.chooseTypes.indexOf('timeLine') === -1) {
         return []
     }
-    let { xDistance, yDistance, element, type } = configs.time.timeLine
+    let { xDistance, yDistance, type } = configs.time.timeLine
     const result = []
     if (type === 'circular') {
         const tNodes = []
@@ -750,14 +749,14 @@ export const getTranslateMap = (configs, len) => {
             })
             tLinks.push({
                 source: i + '',
-                target: i + 1 == len ? `${i - 2}` : `${i + 1}`
+                target: i + 1 === len ? `${i - 2}` : `${i + 1}`
             })
         }
         const data = {
             nodes: tNodes,
             edges: tLinks
         }
-        const { eachWidth, eachHeight, margin } = configs.graph
+        const { eachWidth, eachHeight } = configs.graph
         const eachDis = eachWidth < eachHeight ? eachWidth : eachHeight
         let radius = (eachDis * len) / 5
         var graph = new G6.Graph({
@@ -1019,7 +1018,7 @@ export const setStyle = (timeGraphs, sumGraphs, configs) => {
                 }
             })
         }
-        if (node.type == 'link-node') {
+        if (node.type === 'link-node') {
             node.style.nodeStyle = {
                 ...basicNodeStyle,
                 fillColor: basicLinkStyle.pointFillColor,
@@ -1062,7 +1061,7 @@ export const setStyle = (timeGraphs, sumGraphs, configs) => {
             node.style.nodeStyle = basicNodeStyle
             // 如果用color编码了时间，则修改其填充颜色
             // 处理matrix布局中的链接节点
-            if (node.type == 'link-node') {
+            if (node.type === 'link-node') {
                 node.style.nodeStyle = {
                     ...basicNodeStyle,
                     fillColor: basicLinkStyle.pointFillColor
@@ -1541,13 +1540,13 @@ export const getFindData = (timeGraphs, configs,sumGraphs) => {
                             node.status.push('appearNode')
                         }
                         break
-                    case '=':
-                        if (node[attr] == value) {
+                    case '<=':
+                        if (node[attr] <= value) {
                             node.status.push('appearNode')
                         }
                         break
-                    case '<=':
-                        if (node[attr] <= value) {
+                    default:
+                        if (node[attr] === value) {
                             node.status.push('appearNode')
                         }
                         break

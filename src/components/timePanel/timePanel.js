@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Select, Radio, InputNumber } from 'antd'
+import { Select, Radio, InputNumber } from 'antd'
 import { ChromePicker } from 'react-color'
 import { INSERT_POSITION } from '../../util/dnetChart'
 import {
@@ -66,9 +66,6 @@ class TimePanel extends React.Component {
 
     handleTimeLayoutType =(e) => {
         switch(e){
-            case 'merged':
-                this.handleButtonOnClick('timeLine')
-                break
             case 'juxtaposed':
                 if(this.props.options.chooseTypes.indexOf('timeLine') === -1){
                     this.handleButtonOnClick('timeLine')
@@ -80,6 +77,10 @@ class TimePanel extends React.Component {
                     this.handleButtonOnClick('timeLine')
                 }
                 this.handleTimeOptionsSelect('circular', 'timeLine', 'type')
+                break
+            default:
+                this.handleButtonOnClick('timeLine')
+                break
         }
     }
 

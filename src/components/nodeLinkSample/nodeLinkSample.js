@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React  from 'react'
 import { Radio } from 'antd'
 import SampleItem from '../sampleItem/sampleItem.js'
 import { ROW_BUTTON_STYLE } from '../../util/const.js'
