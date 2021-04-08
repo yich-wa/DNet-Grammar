@@ -1,7 +1,6 @@
 import React from 'react'
 import DataPanel from './components/dataPanel/dataPanel.js'
 import Preview from './components/preview/preview.js'
-import TaskPanel from './components/taskPanel/taskPanel.js'
 import GrammarPanel from './components/grammarPanel/grammarPanel.js'
 import ExampleBoard from './components/exampleBoard/exampleBoard.js'
 import TemplatePanel from './components/templatePanel/templatePanel.js'
@@ -33,12 +32,12 @@ class Board extends React.Component {
         return (
             <div className="board">
                 <div className="window-header">
-                    {/* <img 
+                    <img 
                         className="title-graph-svg" 
                         src={graphSvg}
-                    /> */}
+                    />
                     <div className="window-header-text">
-                        <div className="title"> <span className="bold-font">Nuwa Editor</span> </div>
+                        <div className="title">DNet-<span className="bold-font">Gra</span> </div>
                         {/* <div
                             className={`header-sub-title ${
                                 this.state.board === 'system' ? 'header-sub-choose' : ''
@@ -65,7 +64,7 @@ class Board extends React.Component {
                     <div className="row">
                         <div className="col">
                             <DataPanel />
-                            <TaskPanel/>
+                            <GrammarPanel/>
                         </div>
                         <div className="col">
                             <CombinePanel/>

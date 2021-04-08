@@ -1558,9 +1558,9 @@ export const getFindData = (timeGraphs, configs,sumGraphs) => {
 }
 
 export const filterDataFromChange = (timeGraphs, sumGraphs, configs) =>{
-    const { change } = configs.task
+    const { change, taskType } = configs.task
     
-    if(!change){
+    if(!change||taskType === 'none'){
         return
     }
     // 都有就不处理了直接返回

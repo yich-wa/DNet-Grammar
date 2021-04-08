@@ -51,7 +51,7 @@ export default function NodeLinkStylePanel(props) {
                 // bordered={false}
                 expandIconPosition={'right'}
                 style={{
-                    backgroundColor: '#ffffff'
+                    backgroundColor: '#ffffff',
                 }}
             >
                 <Panel className="nlsp-panel" header={props.optionKey}>

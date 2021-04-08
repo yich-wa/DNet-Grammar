@@ -103,15 +103,16 @@ class TimePanel extends React.Component {
         const changeOptions = this.props.options.insert[optionKey]
         return (
             <div className="time-box combine-inner-border">
-                <div className="combine-inner-title">&nbsp;Encoding</div>
+                <div className="combine-inner-title">&nbsp;Time</div>
                 <div className="encoding-table-container">
                     {/* timeLine */}
                     <div className="encoding-item">
-                        {/* <div className="encoding-item-title">
+                        <div className="encoding-item-title">
                             <Radio.Group
                                 value={
                                     options.chooseTypes.indexOf('timeLine') > -1 ? 'TimeLine' : ''
                                 }
+                                size={"small"}
                             >
                                 <Radio.Button
                                     onClick={(e) => {
@@ -119,27 +120,22 @@ class TimePanel extends React.Component {
                                     }}
                                     style={TIME_BUTTON_STYLE}
                                     value="TimeLine"
+                                    size={"small"}
                                     type
                                 >
                                     TimeLine
                                 </Radio.Button>
                             </Radio.Group>
-                        </div> */}
+                        </div>
                         <div className="encoding-item-content">
                             <div className="item-right-option">
-                                <div>TimeLayout:</div>
+                                <div>Type:</div>
                                 <Select
-                                    value={
-                                        options.chooseTypes.indexOf('timeLine') === -1 
-                                            ? 'merged'
-                                            : (options.timeLine.type ==='linear'
-                                                ? 'juxtaposed'
-                                                : 'circular')
-                                    }
+                                    value={options.timeLine.type}
                                     style={{ width: TPIW }}
                                     size="small"
                                     onChange={(e) =>
-                                        this.handleTimeLayoutType(e)
+                                        this.handleTimeOptionsSelect(e, 'timeLine', 'type')
                                      }
                                 >
                                     {TIME_TIMELINE_TYPE.map((v) => {

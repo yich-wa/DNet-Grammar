@@ -35,7 +35,7 @@ export const TASK_CHANGE_TYPES = ['appearedNode', 'appearedEdge', 'disappearedNo
 
 export const TIME_TIMELINE_ELEMENT = ['node', 'link', 'all']
 export const TIME_CHART_TYPE = ['line', 'bar']
-export const TIME_TIMELINE_TYPE = ['merged','circular','juxtaposed']
+export const TIME_TIMELINE_TYPE = ['circular','linear']
 export const GRAPH_LAYOUT_TYPE = ['matrix','grid','forceDirect','bipartite', 'vertical','circular','dagre','mds','oneMds']
 
 export const KEYFRAM_OPTIONS = ['next', 'last']
@@ -52,7 +52,11 @@ export const ROW_BUTTON_STYLE = {
 }
 
 export const PATTERN_TO_CHANGE = {
-  'graph': [...TASK_CHANGE_TYPES],
+  'compare-structure':[...TASK_CHANGE_TYPES],
+  'compare-attr': [...TASK_CHANGE_TYPES],
+  'find-structure': [...TASK_CHANGE_TYPES],
+  'find-attr': [...TASK_CHANGE_TYPES],
+  'graph': ['unchangedNode','unchangedEdge'],
   'shortest-path': ['unchangedNode','unchangedEdge','appearedNode','appearedEdge'],
   'dumb-bell': ['unchangedNode','unchangedEdge','appearedNode','appearedEdge'],
   'compare-degree': ['unchangedNode','unchangedEdge','appearedNode','disappearedNode'],
@@ -64,8 +68,8 @@ export const TIME_BUTTON_STYLE = {
   width: '252px',
   padding: '0px',
   fontSize: '12px',
-  height: '30px',
-  lineHeight: '32px',
+  height: '26px',
+  lineHeight: '26px',
   alighItems: 'center'
 }
 

@@ -852,23 +852,13 @@ export function getConfigPatternChange(task){
     }
 }
 
-export function getDisplayGrammar(config){
-    const result = getConfigPatternChange(config.task)
-    return {
-        data:'dynamic-graph.json',
-        pattern: result.pattern,
-        change:  result.change,
-        encoding: getConfigEncoding(config)
-    }
-}
-
 export function addPatternAndChange(config){
     const {task} = config
     if(task.taskType==='comparison'){
         if(task.basedType==='structure'){
-            task.pattern = 'graph'
+            task.pattern = 'compare-structure'
         }else{
-            task.pattern = 'compare-degree'
+            task.pattern = 'compare-attr'
         }
     }else if(task.taskType === 'find'){
         if(task.basedType==='structure'){
@@ -878,7 +868,7 @@ export function addPatternAndChange(config){
                 task.pattern = 'dumb-bell'
             }
         }else{
-            task.pattern = 'find-degree'
+            task.pattern = 'find-attr'
         }
     }else{
         task.pattern = 'graph'

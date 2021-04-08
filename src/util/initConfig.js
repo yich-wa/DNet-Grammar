@@ -138,9 +138,9 @@ export const initConfig = {
             relation: '>=',
             value: 3
         },
-        pattern: 'graph',
-        // change: [...PATTERN_TO_CHANGE['graph']],
-        change: [],
+        pattern: 'compare-structure',
+        change: [...PATTERN_TO_CHANGE['compare-structure']],
+        // change: [],
         comparison: {
             chooseItem: 'stable-Node',
             chooseTypes: COMPARISON_CONFIG,

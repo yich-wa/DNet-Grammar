@@ -66,10 +66,10 @@ class GraphPanel extends React.Component {
         const linkOptions = this.props.options['linkStyle']
         return (
             <div className="basic-box combine-inner-border">
-                <div className="combine-inner-title">&nbsp;Encoding</div>
+                <div className="combine-inner-title">&nbsp;Graph</div>
                 <div className="encoding-table-container">
                     <div className="change-option-item">
-                        <div>GraphLayout:</div>
+                        <div>Layout:</div>
                         <Select
                             size="small"
                             value={this.props.options.layout.chooseType}
@@ -131,12 +131,6 @@ class GraphPanel extends React.Component {
                         type={this.state.chooseItem}
                         optionKey={optionKey}
                         changeOptions={changeOptions}
-                        onSubmit={this.changeGraphConfig}
-                    />
-                    <NodeLinkStylePanel
-                        type={'Link'}
-                        optionKey={'linkStyle'}
-                        changeOptions={linkOptions}
                         onSubmit={this.changeGraphConfig}
                     />
                 </div>

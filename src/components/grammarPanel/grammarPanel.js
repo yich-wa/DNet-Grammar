@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { update } from '../../redux/config.redux.js'
 import * as _ from 'lodash'
 import './grammarPanel.css'
-import { getSimpleGrammar,getDisplayGrammar } from '../../util/dnetChart.js'
+import { getSimpleGrammar } from '../../util/dnetChart.js'
 
 function GrammarPanel(props) {
     const [grammarType, setGrammarType] = useState('simple')
@@ -44,7 +44,7 @@ function GrammarPanel(props) {
                     <use xlinkHref="#icon-download"></use>
                 </svg>
             </div>
-            {/* <div className="gp-header-text">
+            <div className="gp-header-text">
                 <div
                     className={`gp-sub-title ${grammarType === 'simple' ? 'gp-sub-choose' : ''}`}
                     onClick={() => setGrammarType('simple')}
@@ -58,12 +58,12 @@ function GrammarPanel(props) {
                 >
                     All
                 </div>
-            </div> */}
+            </div>
             <div className="json-text simple_scrollbar">
                 <ReactJson
                     className="json-box"
                     {...REACT_JSON_OPTIONS}
-                    src={grammarType === 'simple' ? getDisplayGrammar(props.config) : props.config}
+                    src={grammarType === 'simple' ? getSimpleGrammar(props.config) : props.config}
                 />
             </div>
         </div>

@@ -21,6 +21,7 @@ export default function CombinePanel(props) {
             >
                 <div>
                     <GraphPanel/>
+                    <TaskPanel/>
                 </div>
                 <TimePanel/>
             </div>

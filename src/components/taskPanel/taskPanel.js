@@ -52,15 +52,6 @@ const index2chooseItem = [
     'disappear-Link'
 ]
 
-const changeOptions = [
-    'appear-Node',
-    'stable-Node',
-    'disappear-Node',
-    'appear-Link',
-    'stable-Link',
-    'disappear-Link'
-]
-
 class TaskPanel extends React.Component {
     constructor(props) {
         super(props)
@@ -111,18 +102,9 @@ class TaskPanel extends React.Component {
     }
 
     handleChangeCheckChange = (list) => {
-        // this.handleComparisonChange({ chooseTypes: list })
-        // this.setState({ changeList: list })
-        // this.setState({ changeIndeterminate: !!list.length && list.length < TASK_CHANGE_TYPES.length })
-        // this.setState({ changeCheckAll: list.length === TASK_CHANGE_TYPES.length })
         this.handleTaskPanelChange('change', list)
     }
     handleAllChangeCheckChange = (e) => {
-        // this.setState({ changeIndeterminate: false })
-        // this.setState({ changeCheckAll: e.target.checked })
-        // if (e.target.checked) {
-        //     this.setState({ changeList: [...TASK_CHANGE_TYPES] })
-        // }
         this.handleTaskPanelChange('change', [...TASK_CHANGE_TYPES])
     }
 
@@ -202,11 +184,11 @@ class TaskPanel extends React.Component {
     }
     changeTaskConfig = (value) => {
         this.props.modifyConfig({ key: 'task', value })
+        console.log("changeTaskConfig", value)
     }
 
     render() {
         const { comparison, find, taskType, basedType, pattern, change} = this.props.options
-        const patternAndChange = getConfigPatternChange(this.props.options)
         const {
             chooseItem,
             keyFrame,
@@ -223,28 +205,111 @@ class TaskPanel extends React.Component {
         changeKey = changeKey.join('')
         const changeOptions = comparison[changeKey]
         return (
-            <div className="Comparison-box">
-                <div className="sub-title">&nbsp;Entity and Change</div>
+            <div className="Comparison-box combine-inner-border">
+                <div className="combine-inner-title">&nbsp;Task</div>
                 <div className="encoding-table-container">
-                    <div className="change-option-title">
-                        <div className="divider">Entity</div>
+                    <div className="change-option-item">
+                        <div>TaskType</div>
+                        <Select
+                            value={taskType}
+                            size="small"
+                            style={{ width: TPIW }}
+                            onChange={(value) => this.handleTaskPanelChange('taskType', value)}
+                        >
+                            <Option value="comparison">comparison</Option>
+                            <Option value="find">find</Option>
+                            <Option value="none">none</Option>
+                        </Select>
                     </div>
                     <div className="change-option-item">
-                        {/* <div>Entity:</div> */}
+                        <div >BasedType</div>
                         <Select
-                            value={pattern}
-                            style={{ width: 260 }}
+                            value={basedType}
                             size="small"
-                            onChange={(value) => this.handleTaskPatternSelect(value)}
+                            style={{ width: TPIW }}
+                            onChange={(value) => this.handleTaskPanelChange('basedType', value)}
                         >
-                            {TASK_PATTERN_TYPES.map((v) => {
-                                return (
-                                    <Option key={v} value={v}>
-                                        {v}
-                                    </Option>
-                                )
-                            })}
+                            <Option value="attr">attr</Option>
+                            <Option value="structure">structure</Option>
                         </Select>
+                    </div>
+                    <div className="change-option-item">
+                        <Collapse
+                            expandIconPosition={'right'}
+                            size="small"
+                            style={{
+                                backgroundColor: '#ffffff',
+                                width: '100%'
+                            }}
+                            defaultActiveKey={['1']}
+                        >
+                            <Panel key="1" className="nlsp-panel" header={'Change'}>
+                                <Col
+                                    style={{
+                                        width: '50%',
+                                        display: 'flex',
+                                        flexDirection: 'flex-start',
+                                        paddingLeft: '10px'
+                                    }}
+                                >
+                                    <Checkbox
+                                        indeterminate={false}
+                                        onChange={this.handleAllChangeCheckChange}
+                                        checked={
+                                            change.length === TASK_CHANGE_TYPES.length
+                                        }
+                                    >
+                                        all
+                                    </Checkbox>
+                                </Col>
+                                <Checkbox.Group
+                                    style={{
+                                        textAlign: 'left',
+                                        width: '100%',
+                                        paddingLeft: '10px'
+                                    }}
+                                    value={change}
+                                    onChange={this.handleChangeCheckChange}
+                                >
+                                    {[0, 2, 4].map((v) => {
+                                        return (
+                                            <Row
+                                                style={{
+                                                    width: '100%'
+                                                }}
+                                                key={`row-${v}`}
+                                            >
+                                                <Col
+                                                    style={{
+                                                        width: '50%',
+                                                        display: 'flex',
+                                                        flexDirection: 'flex-start'
+                                                    }}
+                                                >
+                                                    <Checkbox value={TASK_CHANGE_TYPES[v]}>
+                                                        {TASK_CHANGE_TYPES[v]}
+                                                    </Checkbox>
+                                                </Col>
+                                                <Col
+                                                    style={{
+                                                        width: '50%',
+                                                        display: 'flex',
+                                                        flexDirection: 'flex-start'
+                                                    }}
+                                                >
+                                                    <Checkbox
+                                                        style={{ fontSize: '10px' }}
+                                                        value={TASK_CHANGE_TYPES[v + 1]}
+                                                    >
+                                                        {TASK_CHANGE_TYPES[v + 1]}
+                                                    </Checkbox>
+                                                </Col>
+                                            </Row>
+                                        )
+                                    })}
+                                </Checkbox.Group>
+                            </Panel>
+                        </Collapse>
                     </div>
                     {pattern === 'shortest-path' ? (
                         <>
@@ -308,25 +373,6 @@ class TaskPanel extends React.Component {
                             </div>
                         </>
                     ) : null}
-                    {/* <div className="change-option-item">
-                        <div>Change:</div>
-                        <Select
-                            value={patternAndChange.change}
-                            style={{ width: 125 }}
-                            onChange={(value) => this.handleTaskChangeSelect(value)}
-                        >
-                            {TASK_CHANGE_TYPES.map((v) => {
-                                return (
-                                    <Option key={v} value={v}>
-                                        {v}
-                                    </Option>
-                                )
-                            })}
-                        </Select>
-                    </div> */}
-                    <div className="change-option-title">
-                        <div className="divider">Change</div>
-                    </div>
                     <div className="change-option-item">
                         <Collapse
                             expandIconPosition={'right'}
@@ -334,85 +380,7 @@ class TaskPanel extends React.Component {
                                 backgroundColor: '#ffffff',
                                 width: '100%'
                             }}
-                            defaultActiveKey={['1']}
-                        >
-                            <Panel key="1" className="nlsp-panel" header={'Change'}>
-                                <Col
-                                    style={{
-                                        width: '50%',
-                                        display: 'flex',
-                                        flexDirection: 'flex-start',
-                                        paddingLeft: '10px'
-                                    }}
-                                >
-                                    <Checkbox
-                                        indeterminate={false}
-                                        onChange={this.handleAllChangeCheckChange}
-                                        checked={
-                                            change.length === TASK_CHANGE_TYPES.length
-                                        }
-                                    >
-                                        all
-                                    </Checkbox>
-                                </Col>
-                                <Checkbox.Group
-                                    style={{
-                                        textAlign: 'left',
-                                        width: '100%',
-                                        paddingLeft: '10px'
-                                    }}
-                                    // value={this.state.changeList}
-                                    value={change}
-                                    onChange={this.handleChangeCheckChange}
-                                >
-                                    {[0, 2, 4].map((v) => {
-                                        return (
-                                            <Row
-                                                style={{
-                                                    width: '100%'
-                                                }}
-                                                key={`row-${v}`}
-                                            >
-                                                <Col
-                                                    style={{
-                                                        width: '50%',
-                                                        display: 'flex',
-                                                        flexDirection: 'flex-start'
-                                                    }}
-                                                >
-                                                    <Checkbox value={TASK_CHANGE_TYPES[v]}>
-                                                        {TASK_CHANGE_TYPES[v]}
-                                                    </Checkbox>
-                                                </Col>
-                                                <Col
-                                                    style={{
-                                                        width: '50%',
-                                                        display: 'flex',
-                                                        flexDirection: 'flex-start'
-                                                    }}
-                                                >
-                                                    <Checkbox
-                                                        style={{ fontSize: '10px' }}
-                                                        value={TASK_CHANGE_TYPES[v + 1]}
-                                                    >
-                                                        {TASK_CHANGE_TYPES[v + 1]}
-                                                    </Checkbox>
-                                                </Col>
-                                            </Row>
-                                        )
-                                    })}
-                                </Checkbox.Group>
-                            </Panel>
-                        </Collapse>
-                    </div>
-                    {/*
-                    <div className="change-option-item">
-                        <Collapse
-                            expandIconPosition={'right'}
-                            style={{
-                                backgroundColor: '#ffffff',
-                                width: '100%'
-                            }}
+                            size="small"
                             defaultActiveKey={['0']}
                         >
                             <Panel key="1" className="nlsp-panel" header={'chooseTypes'}>
@@ -477,9 +445,8 @@ class TaskPanel extends React.Component {
                                 </Checkbox.Group>
                             </Panel>
                         </Collapse>
-                    </div>
-                                */}
-                    {/* {taskType === 'comparison' ? (
+                    </div>    
+                    {taskType === 'comparison' ? (
                         <>
                             <div className="change-option-item">
                                 <div>KeyFrame:</div>
@@ -520,8 +487,8 @@ class TaskPanel extends React.Component {
                                 </Select>
                             </div>
                         </>
-                    ) : null} */}
-                    {/* {taskType === 'find' && basedType === 'attr' ? (
+                    ) : null}
+                    {taskType === 'find' && basedType === 'attr' ? (
                         <>
                             <div className="change-option-item">
                                 <div>Attr:</div>
@@ -573,7 +540,7 @@ class TaskPanel extends React.Component {
                                 />
                             </div>
                         </>
-                    ) : null} */}
+                    ) : null}
 
                     <div className="comparison-table-container">
                         <div className="table-first-line">
