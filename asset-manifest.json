@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/DNet-Grammar/static/css/main.52b454fd.chunk.css",
-    "main.js": "/DNet-Grammar/static/js/main.040d5a3b.chunk.js",
-    "main.js.map": "/DNet-Grammar/static/js/main.040d5a3b.chunk.js.map",
+    "main.js": "/DNet-Grammar/static/js/main.1ad8cce3.chunk.js",
+    "main.js.map": "/DNet-Grammar/static/js/main.1ad8cce3.chunk.js.map",
     "runtime-main.js": "/DNet-Grammar/static/js/runtime-main.7bde8fe3.js",
     "runtime-main.js.map": "/DNet-Grammar/static/js/runtime-main.7bde8fe3.js.map",
     "static/js/2.eec39924.chunk.js": "/DNet-Grammar/static/js/2.eec39924.chunk.js",
     "static/js/2.eec39924.chunk.js.map": "/DNet-Grammar/static/js/2.eec39924.chunk.js.map",
     "index.html": "/DNet-Grammar/index.html",
-    "precache-manifest.11f6aeb4f5fdc1147f5b4d2bdfbb8d68.js": "/DNet-Grammar/precache-manifest.11f6aeb4f5fdc1147f5b4d2bdfbb8d68.js",
+    "precache-manifest.5a4d46576752013506856f8ee56943b3.js": "/DNet-Grammar/precache-manifest.5a4d46576752013506856f8ee56943b3.js",
     "service-worker.js": "/DNet-Grammar/service-worker.js",
     "static/css/main.52b454fd.chunk.css.map": "/DNet-Grammar/static/css/main.52b454fd.chunk.css.map",
     "static/js/2.eec39924.chunk.js.LICENSE.txt": "/DNet-Grammar/static/js/2.eec39924.chunk.js.LICENSE.txt",
@@ -21,6 +21,6 @@
     "static/js/runtime-main.7bde8fe3.js",
     "static/js/2.eec39924.chunk.js",
     "static/css/main.52b454fd.chunk.css",
-    "static/js/main.040d5a3b.chunk.js"
+    "static/js/main.1ad8cce3.chunk.js"
   ]
 }
