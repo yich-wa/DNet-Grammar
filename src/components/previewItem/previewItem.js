@@ -60,7 +60,6 @@ export default function PreviewItem(props) {
         }
     }, [props.data, props.config.time.chooseTypes])
     if (props.data.length === 0) return null
-    console.log("PreviewItem----")
     return (
         <DnetChartContainer
             sampleWidth={sampleWidth}

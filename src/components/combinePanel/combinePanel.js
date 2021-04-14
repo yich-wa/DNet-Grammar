@@ -13,10 +13,12 @@ export default function CombinePanel(props) {
                 &nbsp;Specification
                 <img
                     className="icon"
+                    alt = "saveSvg"
                     src={saveSvg}
                 />
                 <img
                     className="icon"
+                    alt = "settingsSvg"
                     src={settingsSvg}
                 />
             </div>

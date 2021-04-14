@@ -18,6 +18,7 @@ function Preview(props) {
                 <img
                     className="icon"
                     src={downloadSvg}
+                    alt={"downloadSvg"}
                 />
             </div>
             <div

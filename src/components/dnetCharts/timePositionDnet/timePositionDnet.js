@@ -4,6 +4,7 @@ import DividedLinkItem from '../../dividedLinkItem/dividedLinkItem.js'
 import NodeContainer from '../../nodeContainer/nodeContainer.js'
 import { getSvgWidthHeight } from '../../../util/dnetChart'
 import MarkLineItem from '../../markLineItem/markLineItem.js'
+import ColorLegend from '../../colorLegend/colorLegend.js'
 import { getPiePathColor } from '../../../util/dnetChart.js'
 
 export default function TimePositionDnet(props) {
@@ -22,6 +23,13 @@ export default function TimePositionDnet(props) {
     const isChart = timeChooseTypes.indexOf('chart') > -1
     const isMatrix = layout.chooseType === 'matrix'
     return (
+        <>
+            <ColorLegend
+                len = {dataLength}
+                timeChooseTypes = {timeChooseTypes}
+                colorScale = {colorScale}
+                isSample = {props.isSample}
+            />
         <svg
             className="nlg-container-svg"
             width={`${props.sampleWidth ? props.sampleWidth : svgWidth}px`}
@@ -66,5 +74,6 @@ export default function TimePositionDnet(props) {
                 )
             })}
         </svg>
+        </>
     )
 }

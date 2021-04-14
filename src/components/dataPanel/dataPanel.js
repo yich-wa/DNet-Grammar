@@ -214,6 +214,7 @@ class DataPanel extends React.Component {
                     <img
                         className="icon"
                         src={dataBaseSvg}
+                        alt={"dataBaseSvg"}
                         onClick={this.handleChangeData}
                     />
                 </div>

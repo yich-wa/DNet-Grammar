@@ -2,6 +2,7 @@ import React from 'react'
 import DividedLinkItem from '../../dividedLinkItem/dividedLinkItem.js'
 import LinkContainer from '../../linkContainer/linkContainer.js'
 import NodeContainer from '../../nodeContainer/nodeContainer.js'
+import ColorLegend from '../../colorLegend/colorLegend.js'
 import { getPiePathColor } from '../../../util/dnetChart.js'
 
 export default function TimeSumDnet(props) {
@@ -9,8 +10,6 @@ export default function TimeSumDnet(props) {
     const timeChooseTypes = props.config.time.chooseTypes
 
     // isColor是true以及isSample是false的时候，是渲染图例的
-    const legendData = new Array(props.len).fill(0)
-    const singleLegendWidth = 15
     // 确定颜色比例尺
     const { startColor = '#FD8F8F', endColor = '#90B5FB' } = props.config.time.color
     let colorScale = getPiePathColor(props.len, startColor, endColor)
@@ -25,7 +24,13 @@ export default function TimeSumDnet(props) {
 
     return (
         <>
-            {!props.isSample && isColor ? (
+            <ColorLegend
+                len = {props.len}
+                timeChooseTypes = {timeChooseTypes}
+                colorScale = {colorScale}
+                isSample = {props.isSample}
+            />
+            {/* {!props.isSample && isColor ? (
                 <div
                     style={{
                         width: '100%',
@@ -71,7 +76,8 @@ export default function TimeSumDnet(props) {
                         {props.len - 1}
                     </div>
                 </div>
-            ) : null}
+            ) : null} */}
+
             <svg
                 className="nlg-container-svg"
                 width={`${props.sampleWidth ? props.sampleWidth : svgWidth}px`}

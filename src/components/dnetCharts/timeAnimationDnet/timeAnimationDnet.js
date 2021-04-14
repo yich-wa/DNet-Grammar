@@ -3,6 +3,8 @@ import { Slider } from 'antd'
 import { PauseCircleOutlined, PlayCircleOutlined } from '@ant-design/icons'
 import NodeLinkGraph from '../../nodeLinkGraph/nodeLinkGraph.js'
 import { getSvgWidthHeight } from '../../../util/dnetChart'
+import ColorLegend from '../../colorLegend/colorLegend.js'
+import { getPiePathColor } from '../../../util/dnetChart.js'
 import './timeAnimationDnet.css'
 
 export default function TimeAnimationDnet(props) {
@@ -14,6 +16,8 @@ export default function TimeAnimationDnet(props) {
     const timeConfig = config.time
     const speed = timeConfig.animation.speed
     const hasTimeLine = timeConfig.chooseTypes.indexOf('timeLine') > -1
+    const { startColor = '#FD8F8F', endColor = '#90B5FB' } = timeConfig.color
+    let colorScale = getPiePathColor(data.length, startColor, endColor)
     let timeout
 
     useEffect(() => {
@@ -66,7 +70,12 @@ export default function TimeAnimationDnet(props) {
     }
     return data[frameIndex] ? (
         <>
-            
+            <ColorLegend
+                len = {data.length}
+                timeChooseTypes = {timeConfig.chooseTypes}
+                colorScale = {colorScale}
+                isSample = {props.isSample}
+            />
             <NodeLinkGraph 
                 data={props.data[frameIndex]} 
                 dataLength={data.length}
