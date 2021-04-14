@@ -1,32 +1,23 @@
 import React, { useState, useEffect } from 'react'
 import './templatePanel.css'
 import PreviewItem from '../previewItem/previewItem.js'
-import FileSaver from 'file-saver'
 import { DNET_SAMPLE_WIDTH, DNET_SAMPLE_HEIGHT } from '../../util/const'
 import { getStorageKeyArr } from '../../util/template'
 import deleteSvg from '../../assets/delete.svg'
 import checkSvg from '../../assets/check.svg'
+import addSvg from '../../assets/add.svg'
 import { defaultTemplates } from '../../data/template.js'
 import * as exampleData from '../../data/import/test2.json'
 import { connect } from 'react-redux'
 import { update } from '../../redux/config.redux.js'
-import * as assign from 'assign-deep'
 import { initConfig } from '../../util/initConfig.js'
 import * as _ from 'lodash'
-import { addPatternAndChange } from '../../util/dnetChart'
+import { coverTemplateConfig } from '../../util/dnetChart'
 
 function TemplatePanel(props) {
-    const [localStorage, setLocalStorage] = useState(window.localStorage)
+    const [localStorage] = useState(window.localStorage)
     const [storageLength, setStorageLength] = useState(0)
     const [storageKeyArr, setStorageKeyArr] = useState(getStorageKeyArr(localStorage))
-    // const [config,setConfig] = useState(props.config)
-    // // const [width, setWidth] = useState(0)
-    // // const [height, setHeight] = useState(0)
-    // useEffect(()=>{
-    //     setConfig(props.config)
-    // },[props.config])
-    
-
 
 
     useEffect(() => {
@@ -77,35 +68,11 @@ function TemplatePanel(props) {
         }
     }
 
-    function handleTemplateSave() {
-        let content = JSON.stringify(props.config)
-        let type = 'data:application/json;charset=utf-8'
-        let blob = new Blob([content], { type: type })
-
-        let isFileSaverSupported = false
-        try {
-            isFileSaverSupported = !!new Blob()
-        } catch (e) {
-            console.log(e)
-        }
-
-        if (isFileSaverSupported) {
-            FileSaver.saveAs(blob, 'template.json')
-        } else {
-            FileSaver.open(encodeURI(type + ',' + content))
-        }
-    }
-
-    function coverConfig(newInitConfig, vConfig){
-        assign(newInitConfig, vConfig)
-        addPatternAndChange(newInitConfig)
-    }
-
     function handleTemplateCheck(v) {
         const vContent = JSON.parse(localStorage.getItem(v))
         if (vContent && vContent.config) {
             const newInitConfig = _.cloneDeep(initConfig)
-            coverConfig(newInitConfig, vContent.config)
+            coverTemplateConfig(newInitConfig, vContent.config)
             props.update(newInitConfig)
         }
     }
@@ -114,12 +81,10 @@ function TemplatePanel(props) {
         localStorage.removeItem(storeKey)
         setStorageLength(localStorage.length)
     }
-
+     
     return (
         <div
             style={{
-                // width: `${props.width ? props.width : 1030}px`,
-                // height: `${props.height ? props.height : 456}px`
                 width: '1030px',
                 height: '456px'
             }}
@@ -127,12 +92,11 @@ function TemplatePanel(props) {
         >
             <div className="sub-title">
                 &nbsp;template
-                <svg className="icon" onClick={handleTemplateAdd} aria-hidden="true">
-                    <use xlinkHref="#icon-add"></use>
-                </svg>
-                <svg className="icon" onClick={handleTemplateSave} aria-hidden="true">
-                    <use xlinkHref="#icon-download"></use>
-                </svg>
+                <img
+                    className="icon"
+                    src={addSvg}
+                    onClick={handleTemplateAdd}
+                />
             </div>
             <div className="template-content-box simple_scrollbar">
                 {storageKeyArr.map((v, storageIndex) => {
@@ -173,6 +137,7 @@ function TemplatePanel(props) {
                                     config={vContent.config} 
                                     sampleWidth = {DNET_SAMPLE_WIDTH}
                                     sampleHeight = {DNET_SAMPLE_HEIGHT}
+                                    isSample = {true}
                                 />
                             </div>
                         </div>
@@ -191,9 +156,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
     update
 }
-// function areEqual(prevProps, nextProps) {
-//     return true
-// }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TemplatePanel)
 // export default React.memo(connect(mapStateToProps, mapDispatchToProps)(TemplatePanel), areEqual)

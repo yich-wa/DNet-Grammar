@@ -5,6 +5,7 @@ import { connect } from "react-redux"
 import { 
 	setGraphData, 
 } from '../../redux/graphData.redux.js'
+import dataBaseSvg from '../../assets/dataBase.svg'
 import * as testData from '../../data/import/test1.json'
 import * as simpleData from '../../data/import/test2.json'
 import * as insertData from '../../data/import/test3-insert.json'
@@ -210,9 +211,11 @@ class DataPanel extends React.Component {
                 <div className="sub-title">
                     {' '}
                     &nbsp; Data
-                    <svg className="icon" onClick={this.handleChangeData} aria-hidden="true">
-                        <use xlinkHref="#icon-center"></use>
-                    </svg>
+                    <img
+                        className="icon"
+                        src={dataBaseSvg}
+                        onClick={this.handleChangeData}
+                    />
                 </div>
                 <div className="divider">Overview</div>
                 <div className="item0">

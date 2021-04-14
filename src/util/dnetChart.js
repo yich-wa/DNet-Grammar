@@ -820,6 +820,8 @@ export function getConfigPatternChange(task){
     }
 }
 
+
+
 export function addPatternAndChange(config){
     const {task} = config
     if(task.taskType==='comparison'){
@@ -843,6 +845,12 @@ export function addPatternAndChange(config){
     }
     task.change = [...PATTERN_TO_CHANGE[task.pattern]]
 }
+
+export function coverTemplateConfig(newInitConfig, vConfig){
+    assign(newInitConfig, vConfig)
+    addPatternAndChange(newInitConfig)
+}
+
 
 export function getSimpleGrammar(config){
     return {

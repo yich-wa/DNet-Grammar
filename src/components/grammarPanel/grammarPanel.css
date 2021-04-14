@@ -16,15 +16,18 @@
 .gp-header-text{
     display: flex;
     justify-content: center;
-    height: 25px;
+    height: 27px;
+    line-height: 27px;
     background: #e6e6e6;
-    padding-top: 5px;
+    /* padding-top: 5px; */
     align-items: center;
 }
 
 .gp-sub-title{
-    font-size: 14px;
-    padding: 0 12px;
+    line-height: 15px;
+    height: 15px;
+    font-size: 13px;
+    margin: 6px;
     font-weight: 400;
     color: #444;
     cursor: pointer;
@@ -38,5 +41,5 @@
 }
 .gp-sub-choose{
     color: #fda167;
-    font-weight: 450;
+    font-weight: 400;
 }

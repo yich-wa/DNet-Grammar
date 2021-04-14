@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from "react-redux"
 import PreviewItem from '../previewItem/previewItem.js'
+import downloadSvg from '../../assets/download.svg'
 
 function Preview(props) {
     // 要计算
@@ -14,9 +15,10 @@ function Preview(props) {
         >
             <div className="sub-title">
                 &nbsp;Preview
-                <svg className="icon" aria-hidden="true">
-                    <use xlinkHref="#icon-download"></use>
-                </svg>
+                <img
+                    className="icon"
+                    src={downloadSvg}
+                />
             </div>
             <div
                 className = "simple_scrollbar"
@@ -28,6 +30,7 @@ function Preview(props) {
                 }}
             >
                 <PreviewItem
+                    isSample = {false}
                     data= {props.data}
                     config = {props.config}
                 />

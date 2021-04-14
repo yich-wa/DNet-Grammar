@@ -3,10 +3,11 @@ import ReactJson from 'react-json-view'
 import FileSaver from 'file-saver'
 import { REACT_JSON_OPTIONS } from '../../util/const'
 import { connect } from 'react-redux'
-import { update } from '../../redux/config.redux.js'
-// import * as _ from 'lodash'                                                                                                                               
+import { update } from '../../redux/config.redux.js'                                                                                                                            
 import './grammarPanel.css'
 import { getSimpleGrammar } from '../../util/dnetChart.js'
+import addSvg from '../../assets/add.svg'
+import downloadSvg from '../../assets/download.svg'
 
 function GrammarPanel(props) {
     const [grammarType, setGrammarType] = useState('simple')
@@ -37,12 +38,16 @@ function GrammarPanel(props) {
         <div className="grammar-panel-box">
             <div className="sub-title">
                 &nbsp;Grammar
-                <svg className="icon" onClick={handleTemplateAdd} aria-hidden="true">
-                    <use xlinkHref="#icon-add"></use>
-                </svg>
-                <svg className="icon" onClick={handleTemplateSave} aria-hidden="true">
-                    <use xlinkHref="#icon-download"></use>
-                </svg>
+                <img
+                    className="icon"
+                    src={addSvg}
+                    onClick={handleTemplateAdd}
+                />
+                <img
+                    className="icon"
+                    src={downloadSvg}
+                    onClick={handleTemplateSave}
+                />
             </div>
             <div className="gp-header-text">
                 <div

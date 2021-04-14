@@ -6,6 +6,7 @@ import TimeSumDnet from '../timeSumDnet/timeSumDnet.js'
 
 export default function DnetChartContainer(props) {
     const { sampleWidth,sampleHeight,renderType, markLine, subGraphs, config, len, sumGraphs, isSample = false } = props
+    console.log("DnetChartContainer--render")
     switch (renderType) {
         case 'timeLine':
             return <TimePositionDnet 
@@ -14,6 +15,7 @@ export default function DnetChartContainer(props) {
                     markLine={markLine} 
                     data={subGraphs} 
                     config={config} 
+                    isSample={isSample}
                 />
         case 'animation':
             return <TimeAnimationDnet
