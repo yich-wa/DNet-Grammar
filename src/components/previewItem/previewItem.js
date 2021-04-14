@@ -3,7 +3,6 @@ import { converObject2Array } from '../../util/preview.js'
 import DnetChartContainer from '../dnetCharts/dnetChartContainer/dnetChartContainer.js'
 import dnetv from '../../util/dnetv.js'
 import { getRenderType } from '../../util/dnetChart'
-import { configs } from 'eslint-plugin-prettier'
 
 
 export default function PreviewItem(props) {
@@ -23,26 +22,21 @@ export default function PreviewItem(props) {
             let { timeGraphs: tempTimeGraphs, markLine: tempMarkLine, sumGraphs: tempSumGraphs} = dnetvInstance
             tempTimeGraphs = converObject2Array(tempTimeGraphs)
             if(JSON.stringify(subGraphs)!==JSON.stringify(tempTimeGraphs)){
-                console.log("setSubGraphs")
                 setSubGraphs(tempTimeGraphs)
             }
             if(JSON.stringify(markLine)!==JSON.stringify(tempMarkLine)){
                 setMarkLine(tempMarkLine)
-                console.log("setMarkLine")
             }
             if(JSON.stringify(sumGraphs)!==JSON.stringify(tempSumGraphs)){
                 setSumGraphs(tempSumGraphs)
-                console.log("setSumGraphs")
             }   
         }
         if(JSON.stringify(config)!==JSON.stringify(props.config)){
             setConfig(props.config)
-            console.log("setConfig")
         }
     }, [props.config, props.data])
 
     useEffect(() => {
-        console.log("useEffect----sampleWidth")
         if(isSample!==props.isSample){
             setIsSample( props.isSample)
         }
@@ -60,7 +54,6 @@ export default function PreviewItem(props) {
             let tempRenderType = getRenderType(props.config.time.chooseTypes)
             if(tempRenderType!==renderType){
                 setRenderType(tempRenderType)
-                console.log("setRenderType")
             }
         } else {
             setRenderType('')

@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import './templatePanel.css'
-import PreviewItem from '../previewItem/previewItem.js'
-import { DNET_SAMPLE_WIDTH, DNET_SAMPLE_HEIGHT } from '../../util/const'
+import TemplateList from '../templateList/templateList.js'
 import { getStorageKeyArr } from '../../util/template'
-import deleteSvg from '../../assets/delete.svg'
-import checkSvg from '../../assets/check.svg'
 import addSvg from '../../assets/add.svg'
 import { defaultTemplates } from '../../data/template.js'
-import * as exampleData from '../../data/import/test2.json'
 import { connect } from 'react-redux'
 import { update } from '../../redux/config.redux.js'
 import { initConfig } from '../../util/initConfig.js'
@@ -98,58 +94,16 @@ function TemplatePanel(props) {
                     onClick={handleTemplateAdd}
                 />
             </div>
-            <div className="template-content-box simple_scrollbar">
-                {storageKeyArr.map((v, storageIndex) => {
-                    const vContent = JSON.parse(localStorage.getItem(v))
-                    if (!vContent) {
-                        return null
-                    }
-                    return (
-                        <div className="sample-item-wrap" key={`sample-${storageIndex}`}>
-                            <div className="sample-item-information">
-                                <div className="sample-item-icon">
-                                    <div className="item-image-wrap">
-                                        <img
-                                            className="sample-item-svg"
-                                            src={checkSvg}
-                                            onClick={() => handleTemplateCheck(v)}
-                                        />
-                                    </div>
-                                    <div className="item-image-wrap">
-                                        <img
-                                            className="sample-item-svg"
-                                            src={deleteSvg}
-                                            onClick={() => handleTemplateRemove(v)}
-                                        />
-                                    </div>
-                                </div>
-                                <div className="sample-item-name">{`Specification-${storageIndex}`}</div>
-                            </div>
-                            <div
-                                className="sample-item-chart"
-                                style={{
-                                    // width: DNET_SAMPLE_WIDTH,
-                                    height: DNET_SAMPLE_HEIGHT
-                                }}
-                            >
-                                <PreviewItem 
-                                    data={exampleData.graphs} 
-                                    config={vContent.config} 
-                                    sampleWidth = {DNET_SAMPLE_WIDTH}
-                                    sampleHeight = {DNET_SAMPLE_HEIGHT}
-                                    isSample = {true}
-                                />
-                            </div>
-                        </div>
-                    )
-                })}
-            </div>
+            <TemplateList
+                storageKeyArr = {storageKeyArr}
+                handleTemplateCheck = {handleTemplateCheck}
+                handleTemplateRemove = {handleTemplateRemove}
+            />
         </div>
     )
 }
 
 const mapStateToProps = (state) => ({
-    // data: state.graphData,
     config: state.config
 })
 
@@ -158,4 +112,3 @@ const mapDispatchToProps = {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TemplatePanel)
-// export default React.memo(connect(mapStateToProps, mapDispatchToProps)(TemplatePanel), areEqual)
