@@ -1,26 +1,31 @@
 {
   "files": {
-    "main.css": "/DNet-Grammar/static/css/main.52b454fd.chunk.css",
-    "main.js": "/DNet-Grammar/static/js/main.1ad8cce3.chunk.js",
-    "main.js.map": "/DNet-Grammar/static/js/main.1ad8cce3.chunk.js.map",
+    "main.css": "/DNet-Grammar/static/css/main.6b6e0898.chunk.css",
+    "main.js": "/DNet-Grammar/static/js/main.ef984638.chunk.js",
+    "main.js.map": "/DNet-Grammar/static/js/main.ef984638.chunk.js.map",
     "runtime-main.js": "/DNet-Grammar/static/js/runtime-main.7bde8fe3.js",
     "runtime-main.js.map": "/DNet-Grammar/static/js/runtime-main.7bde8fe3.js.map",
-    "static/js/2.eec39924.chunk.js": "/DNet-Grammar/static/js/2.eec39924.chunk.js",
-    "static/js/2.eec39924.chunk.js.map": "/DNet-Grammar/static/js/2.eec39924.chunk.js.map",
+    "static/js/2.c519bc05.chunk.js": "/DNet-Grammar/static/js/2.c519bc05.chunk.js",
+    "static/js/2.c519bc05.chunk.js.map": "/DNet-Grammar/static/js/2.c519bc05.chunk.js.map",
     "index.html": "/DNet-Grammar/index.html",
-    "precache-manifest.5a4d46576752013506856f8ee56943b3.js": "/DNet-Grammar/precache-manifest.5a4d46576752013506856f8ee56943b3.js",
+    "precache-manifest.53d7175cc02cb30df79c6e1b365c07b7.js": "/DNet-Grammar/precache-manifest.53d7175cc02cb30df79c6e1b365c07b7.js",
     "service-worker.js": "/DNet-Grammar/service-worker.js",
-    "static/css/main.52b454fd.chunk.css.map": "/DNet-Grammar/static/css/main.52b454fd.chunk.css.map",
-    "static/js/2.eec39924.chunk.js.LICENSE.txt": "/DNet-Grammar/static/js/2.eec39924.chunk.js.LICENSE.txt",
+    "static/css/main.6b6e0898.chunk.css.map": "/DNet-Grammar/static/css/main.6b6e0898.chunk.css.map",
+    "static/js/2.c519bc05.chunk.js.LICENSE.txt": "/DNet-Grammar/static/js/2.c519bc05.chunk.js.LICENSE.txt",
     "static/media/index.css": "/DNet-Grammar/static/media/consola.1db29588.ttf",
+    "static/media/add.svg": "/DNet-Grammar/static/media/add.1ea1ec04.svg",
     "static/media/check.svg": "/DNet-Grammar/static/media/check.c82675f2.svg",
+    "static/media/dataBase.svg": "/DNet-Grammar/static/media/dataBase.3769bf32.svg",
     "static/media/delete.svg": "/DNet-Grammar/static/media/delete.e91ce918.svg",
-    "static/media/graphIcon.svg": "/DNet-Grammar/static/media/graphIcon.2bda4605.svg"
+    "static/media/download.svg": "/DNet-Grammar/static/media/download.d7cf46fc.svg",
+    "static/media/graphIcon.svg": "/DNet-Grammar/static/media/graphIcon.2bda4605.svg",
+    "static/media/save.svg": "/DNet-Grammar/static/media/save.ca935104.svg",
+    "static/media/settings.svg": "/DNet-Grammar/static/media/settings.d6a6b416.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.7bde8fe3.js",
-    "static/js/2.eec39924.chunk.js",
-    "static/css/main.52b454fd.chunk.css",
-    "static/js/main.1ad8cce3.chunk.js"
+    "static/js/2.c519bc05.chunk.js",
+    "static/css/main.6b6e0898.chunk.css",
+    "static/js/main.ef984638.chunk.js"
   ]
 }
