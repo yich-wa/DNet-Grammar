@@ -9,7 +9,9 @@ import {
     TASK_FIND_ATTR,
     TASK_FIND_RELATION,
     TASK_CHANGE_TYPES,
-    PATTERN_TO_CHANGE
+    PATTERN_TO_CHANGE,
+    TASK_TYPES,
+    TASK_BASED_TYPES
 } from '../../util/const'
 import { COMPARISON_CONFIG } from '../../util/defaultConfig.js'
 import './comparisonPanel.css'
@@ -210,9 +212,11 @@ class TaskPanel extends React.Component {
                             style={{ width: TPIW }}
                             onChange={(value) => this.handleTaskPanelChange('taskType', value)}
                         >
-                            <Option value="comparison">comparison</Option>
-                            <Option value="find">find</Option>
-                            <Option value="none">none</Option>
+                            {
+                                TASK_TYPES.map(v=>{
+                                    return <Option key={v} value={v}>{v}</Option>
+                                })
+                            }
                         </Select>
                     </div>
                     <div className="change-option-item">
@@ -223,8 +227,11 @@ class TaskPanel extends React.Component {
                             style={{ width: TPIW }}
                             onChange={(value) => this.handleTaskPanelChange('basedType', value)}
                         >
-                            <Option value="attr">attr</Option>
-                            <Option value="structure">structure</Option>
+                            {
+                                TASK_BASED_TYPES.map(v=>{
+                                    return <Option  key={v} value={v}>{v}</Option> 
+                                })
+                            }
                         </Select>
                     </div>
                     <div className="change-option-item">

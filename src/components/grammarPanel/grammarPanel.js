@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import ReactJson from 'react-json-view'
 import FileSaver from 'file-saver'
-import { REACT_JSON_OPTIONS } from '../../util/const'
+import { 
+    REACT_JSON_OPTIONS,
+} from '../../util/const'
 import { connect } from 'react-redux'
-import { update } from '../../redux/config.redux.js'                                                                                                                            
+import { update, modifyConfig } from '../../redux/config.redux.js'                                                                                                                            
 import './grammarPanel.css'
-import { getSimpleGrammar } from '../../util/dnetChart.js'
+import { getSimpleGrammar, updateSimpleConfig } from '../../util/dnetChart.js'
 import addSvg from '../../assets/add.svg'
 import downloadSvg from '../../assets/download.svg'
 
@@ -32,6 +34,20 @@ function GrammarPanel(props) {
         } else {
             FileSaver.open(encodeURI(type + ',' + content))
         }
+    }
+
+    function handleReactJsonEdit(obj) {
+        // console.log("obj, type", JSON.stringify(obj), type)
+       
+        if(grammarType==='all'){
+            props.update(obj.updated_src)
+        }else{
+            const flag = updateSimpleConfig(obj, props.config, props.modifyConfig)
+            if(!flag){
+                return false
+            }
+        }
+        
     }
 
     return (
@@ -67,6 +83,7 @@ function GrammarPanel(props) {
             <div className="json-text simple_scrollbar">
                 <ReactJson
                     className="json-box"
+                    onEdit={handleReactJsonEdit}
                     {...REACT_JSON_OPTIONS}
                     src={grammarType === 'simple' ? getSimpleGrammar(props.config) : props.config}
                 />
@@ -80,7 +97,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-    update
+    update,
+    modifyConfig
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(GrammarPanel)

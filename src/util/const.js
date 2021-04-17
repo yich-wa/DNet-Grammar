@@ -34,7 +34,10 @@ export const TASK_FIND_RELATION = ['>=','=','<=']
 
 export const TASK_PATTERN_TYPES = ['graph','shortest-path', 'frequent-structure','dumb-bell', 'compare-degree', 'find-degree', 'anomaly-detection']
 export const TASK_CHANGE_TYPES = ['appearedNode', 'appearedEdge', 'disappearedNode', 'disappearedEdge','unchangedNode','unchangedEdge']
+export const TASK_TYPES = ['comparison', 'find', 'none']
+export const TASK_BASED_TYPES = ['structure', 'attr']
 
+export const TIME_ENCODING_TYPES = ['timeLine', 'animation', 'color', 'markLine', 'insert', 'chart']
 export const TIME_TIMELINE_ELEMENT = ['node', 'link', 'all']
 export const TIME_CHART_TYPE = ['line', 'bar']
 export const TIME_TIMELINE_TYPE = ['circular','linear']
@@ -85,7 +88,6 @@ export const REACT_JSON_OPTIONS = {
     fontFamily: 'consola'
   },
   collapseStringsAfterLength: 20,
-  // iconStyle: "circle",
   enableClipboard: false,
   displayObjectSize: false
 }

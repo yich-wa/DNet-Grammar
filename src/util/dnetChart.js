@@ -1,7 +1,13 @@
 import * as d3 from 'd3'
 import { defaultConfigs,  COMPARISON_CONFIG} from './defaultConfig'
 import * as _lodash from 'lodash'
-import {PATTERN_TO_CHANGE} from './const.js'
+import {
+    PATTERN_TO_CHANGE,
+    GRAPH_LAYOUT_TYPE,
+    TIME_ENCODING_TYPES,
+    TASK_TYPES,
+    TASK_BASED_TYPES
+} from './const.js'
 import assign from 'assign-deep'
 
 
@@ -862,6 +868,53 @@ export function getSimpleGrammar(config){
             taskType:config.task.taskType,
             basedType: config.task.basedType
         }
+    }
+}
+
+export function updateSimpleConfig(obj, config, modifyConfig){
+    if(obj.namespace[0]==='graph'){
+        if(GRAPH_LAYOUT_TYPE.indexOf(obj.new_value)>-1){
+            modifyConfig({
+                key: 'graph',
+                value: {
+                    layout:{
+                        ...config.graph.layout,
+                        chooseType: obj.new_value
+                    }
+                }
+            })
+            return true
+        }else{
+            return false
+        }
+        
+    }else if(obj.namespace[0]==='time'){
+        if(TIME_ENCODING_TYPES.indexOf(obj.new_value)>-1){
+            modifyConfig({
+                key: 'time' ,
+                value: {
+                    chooseTypes : obj.updated_src.time
+                }
+            })
+            return true
+        }else{
+            return false
+        }
+        
+    }else{
+        const updataSrcTask = obj.updated_src.task
+        if(TASK_TYPES.indexOf(updataSrcTask.taskType)>-1&&TASK_BASED_TYPES.indexOf(updataSrcTask.basedType)>-1){
+            modifyConfig({
+                key: 'task' ,
+                value: {
+                    [obj.name]: obj.new_value
+                }
+            })
+            return true
+        }else{
+            return false
+        }
+        
     }
 }
 
