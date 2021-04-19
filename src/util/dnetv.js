@@ -88,7 +88,7 @@ class DNetV {
         }else{  
             switch (layout){
                 case 'forceDirect':
-                    u.offLineLayout(this.sumGraphs, this.configs)
+                    u.forceLayout(this.sumGraphs, this.configs)
                     break
                 case 'vertical':
                     u.verticalLayout(this.sumGraphs, this.configs)
@@ -106,7 +106,7 @@ class DNetV {
                     u.gridLayout(this.sumGraphs, this.configs)
                     break 
                 default:
-                    u.offLineLayout(this.sumGraphs, this.configs)
+                    u.randomLayout(this.sumGraphs, this.configs)
             }
             // 将位置信息放入每个子图中，并根据time调整位置
             u.getGraphLayout(this.timeGraphs, this.sumGraphs, this.configs)

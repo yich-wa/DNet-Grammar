@@ -41,7 +41,7 @@ export const TIME_ENCODING_TYPES = ['timeLine', 'animation', 'color', 'markLine'
 export const TIME_TIMELINE_ELEMENT = ['node', 'link', 'all']
 export const TIME_CHART_TYPE = ['line', 'bar']
 export const TIME_TIMELINE_TYPE = ['circular','linear']
-export const GRAPH_LAYOUT_TYPE = ['matrix','grid','forceDirect','bipartite', 'vertical','circular','dagre','mds','oneMds']
+export const GRAPH_LAYOUT_TYPE = ['matrix','grid','forceDirect','bipartite', 'vertical','circular','dagre','mds','random','oneMds']
 
 export const KEYFRAM_OPTIONS = ['next', 'last']
 

@@ -503,7 +503,6 @@ export const circularLayout = (sumGraphs, configs) => {
     })
 
     const newData = circularLayout.layout(data)
-    console.log("newData",newData)
     const { nodes: rNodes } = newData
     let nodesObj = {}
     nodes.forEach((node, i) => {
@@ -792,7 +791,8 @@ export const timeASnode = (graphs) => {
         graph.nodes.push({ id: `time-${graph.time}`, type: 'time' })
     })
 }
-export const offLineLayout = (sumGraphs, configs) => {
+export const forceLayout = (sumGraphs, configs) => {
+
     let { nodes, links } = sumGraphs
     const { eachWidth, eachHeight } = configs.graph
     d3.forceSimulation(nodes)
@@ -807,6 +807,46 @@ export const offLineLayout = (sumGraphs, configs) => {
         .stop()
     adjustLayout2Svg(nodes, links, eachWidth, eachHeight)
 }
+
+export const randomLayout = (sumGraphs, configs) => {
+
+    let { nodes, links } = sumGraphs
+    const gNodes = nodes.map((node) => {
+        return {
+            id: node.id
+        }
+    })
+    const gEdges = links.map((link) => {
+        return {
+            source: link.source,
+            target: link.target
+        }
+    })
+    const data = {
+        nodes: gNodes,
+        edges: gEdges
+    }
+    const { eachWidth, eachHeight } = configs.graph
+    var randomLayout = new RandomLayout({
+        width: eachWidth,
+        height: eachHeight,
+        type: 'random'
+    })
+    const newData = randomLayout.layout(data)
+    const { nodes: rNodes } = newData
+    let nodesObj = {}
+    nodes.forEach((node, i) => {
+        node.x = rNodes[i].x
+        node.y = rNodes[i].y
+        nodesObj[node.id] = { ...node }
+    })
+    links.forEach((link) => {
+        link.source = nodesObj[link.source]
+        link.target = nodesObj[link.target]
+    })
+    adjustLayout2Svg(nodes, links, eachWidth, eachHeight)
+}
+
 export const assignConfigs = (setConfigs) => {
     let configs = _.cloneDeep(setConfigs)
     let sumConfigs = {}

@@ -15,7 +15,7 @@ export const initConfig = {
         eachHeight: 300,
         margin: 30,
         layout: {
-            chooseType: 'dagre',
+            chooseType: 'forceDirect',
             vertical: {
                 yDistance: 40,
                 linkStyle: {
