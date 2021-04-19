@@ -3,7 +3,7 @@ import { defaultConfigs } from './defaultConfig'
 import * as assign from 'assign-deep'
 import { getInsertPosition } from './dnetChart.js'
 import * as _ from 'lodash'
-import G6 from '@antv/g6'
+import { GridLayout, CircularLayout, MDSLayout, DagreLayout, ForceLayout, RandomLayout } from '@antv/layout'
 import {TASK_CHANGE_TYPES} from './const'
 export const _intersection = (setA, setB) => {
     let intersection = new Set(setA)
@@ -340,23 +340,17 @@ export const dagreLayout = (sumGraphs, configs) => {
         edges: gEdges
     }
     const { eachWidth, eachHeight } = configs.graph
-    var graph = new G6.Graph({
-        container: 'g6-graph-container',
+    var dagreLayout = new DagreLayout({
         width: eachWidth,
         height: eachHeight,
-        // fitView: true,
-        // fitViewPadding: 20,
-        layout: {
-            type: 'dagre',
-            rankdir: 'TB',
-            nodeSize: [2, 30],
-            nodesep: 1, // 可选
-            ranksep: 1 // 可选
-        }
+        type: 'dagre',
+        rankdir: 'TB',
+        nodeSize: [2, 30],
+        nodesep: 1, // 可选
+        ranksep: 1 // 可选
     })
-    graph.data(data)
-    graph.render()
-    const { nodes: rNodes } = graph.cfg.data
+    const newData = dagreLayout.layout(data)
+    const { nodes: rNodes } = newData
     let nodesObj = {}
     nodes.forEach((node, i) => {
         node.x = rNodes[i].x
@@ -419,19 +413,13 @@ export const mdsLayout = (sumGraphs, configs) => {
         edges: gEdges
     }
     const { eachWidth, eachHeight } = configs.graph
-    var graph = new G6.Graph({
-        container: 'g6-graph-container',
+    const mdsLayout = new MDSLayout({
         width: eachWidth,
         height: eachHeight,
-        // fitView: true,
-        // fitViewPadding: 20,
-        layout: {
-            type: 'mds'
-        }
+        type: 'mds'
     })
-    graph.data(data)
-    graph.render()
-    const { nodes: rNodes} = graph.cfg.data
+    const newData = mdsLayout.layout(data)
+    const { nodes: rNodes} = newData
     let nodesObj = {}
     nodes.forEach((node, i) => {
         node.x = rNodes[i].x
@@ -463,23 +451,17 @@ export const gridLayout = (sumGraphs, configs) => {
         edges: gEdges
     }
     const { eachWidth, eachHeight, layout } = configs.graph
-    var graph = new G6.Graph({
-        container: 'g6-graph-container',
+    var gridLayout = new GridLayout({
         width: eachWidth,
         height: eachHeight,
-        // fitView: true,
-        // fitViewPadding: 20,
-        layout: {
-            type: 'grid',
-            begin: [0, 0], // 可选，
-            condense: false, // 可选
-            rows: layout.grid.rows, // 可选
-            sortBy: 'degree'
-        }
+        type: 'grid',
+        begin: [0, 0], // 可选，
+        condense: false, // 可选
+        rows: layout.grid.rows, // 可选
+        sortBy: 'degree'
     })
-    graph.data(data)
-    graph.render()
-    const { nodes: rNodes } = graph.cfg.data
+    const newData = gridLayout.layout(data)
+    const { nodes: rNodes } = newData
     let nodesObj = {}
     nodes.forEach((node, i) => {
         node.x = rNodes[i].x
@@ -512,21 +494,17 @@ export const circularLayout = (sumGraphs, configs) => {
     }
     const { eachWidth, eachHeight } = configs.graph
     const radius = Math.min(eachWidth, eachHeight) / 2
-    var graph = new G6.Graph({
-        container: 'g6-graph-container',
+    var circularLayout = new CircularLayout({
         width: radius * 2,
         height: radius * 2,
-        // fitView: true,
-        // fitViewPadding: 20,
-        layout: {
-            type: 'circular',
-            radius: radius,
-            center: [radius, radius]
-        }
+        type: 'circular',
+        radius: radius,
+        center: [radius, radius]
     })
-    graph.data(data)
-    graph.render()
-    const { nodes: rNodes } = graph.cfg.data
+
+    const newData = circularLayout.layout(data)
+    console.log("newData",newData)
+    const { nodes: rNodes } = newData
     let nodesObj = {}
     nodes.forEach((node, i) => {
         node.x = rNodes[i].x
@@ -759,21 +737,15 @@ export const getTranslateMap = (configs, len) => {
         const { eachWidth, eachHeight } = configs.graph
         const eachDis = eachWidth < eachHeight ? eachWidth : eachHeight
         let radius = (eachDis * len) / 5
-        var graph = new G6.Graph({
-            container: 'g6-graph-container',
+        var circularLayout = new CircularLayout({
             width: radius * 2,
             height: radius * 2,
-            // fitView: true,
-            // fitViewPadding: 20,
-            layout: {
-                type: 'circular',
-                radius: radius,
-                center: [radius, radius]
-            }
+            type: 'circular',
+            radius: radius,
+            center: [radius, radius]
         })
-        graph.data(data)
-        graph.render()
-        const { nodes: rNodes } = graph.cfg.data
+        const newData = circularLayout.layout(data)
+        const { nodes: rNodes } = newData
         rNodes.forEach((rNode, index) => {
             result.push({
                 x: rNode.x,

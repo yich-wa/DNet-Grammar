@@ -75,7 +75,6 @@ class Board extends React.Component {
                         </div>
                     </div>
                 )}
-                <div id="g6-graph-container" style={{display:"none"}}></div>
             </div>
         )
     }
