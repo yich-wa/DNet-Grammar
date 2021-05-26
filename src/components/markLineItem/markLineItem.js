@@ -1,11 +1,11 @@
 import React from 'react'
-import {
-    getPiePathColor, 
-} from '../../util/dnetChart.js'
+// import {
+//     getPiePathColor, 
+// } from '../../util/dnetChart.js'
 
 export default function MarkLineItem(props) {
     const { markLine, markLineOptions } = props
-    let colorScale = getPiePathColor(200, '#ECAA7B', '#98DDF3')
+    // let colorScale = getPiePathColor(200, '#ECAA7B', '#98DDF3')
     return (
         <g>
             {markLine.map((links, index) => {
@@ -15,8 +15,7 @@ export default function MarkLineItem(props) {
                             return (
                                 <path
                                     d={v}
-                                    // stroke={markLineOptions.strokeColor}
-                                    stroke={colorScale(index)}
+                                    stroke={markLineOptions.strokeColor}
                                     strokeWidth={`${markLineOptions.strokeWidth}px`}
                                     opacity={markLineOptions.opacity}
                                     fill={"none"}
