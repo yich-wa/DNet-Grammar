@@ -139,6 +139,7 @@ export function converObject2Array(data) {
     })
 }
 
+/*
 // 求交集
 function intersection(setA, setB) {
     let _intersection = new Set(setA)
@@ -166,3 +167,4 @@ function union(setA, setB) {
     }
     return _union
 }
+*/

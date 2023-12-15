@@ -245,7 +245,7 @@ export const bipartiteLayout = (sumGraphs, timeGraphs, configs) => {
         sumRevertLinksArr.push(sLink)
     })
     // 复制一份总图链接
-    while(sumRevertLinksArr.length>0){
+    while (sumRevertLinksArr.length > 0) {
         const sLink = sumRevertLinksArr.pop()
         links.push(sLink)
     }
@@ -267,7 +267,7 @@ export const bipartiteLayout = (sumGraphs, timeGraphs, configs) => {
             graph.nodes[sNode.id] = sNode
         }
 
-        let subReverLinksArr=[]
+        let subReverLinksArr = []
         // 3. 根据总图链接的位置，调整分帧图链接的位置
         Object.values(graph.links).forEach((link) => {
             const revertLink = _.cloneDeep(link)
@@ -276,7 +276,7 @@ export const bipartiteLayout = (sumGraphs, timeGraphs, configs) => {
             assign(revertLink, _.cloneDeep(sumLinksArr[revertLink.id]))
             subReverLinksArr.push(revertLink)
         })
-        while(subReverLinksArr.length>0){
+        while (subReverLinksArr.length > 0) {
             const srLink = subReverLinksArr.pop()
             graph.links[srLink.id] = srLink
         }
@@ -372,12 +372,12 @@ export const dagreLayout = (sumGraphs, configs) => {
 
 export const oneMdsLayout = (sumGraphs, timeGraphs, configs) => {
     const { eachWidth, eachHeight, margin } = configs.graph
-    const { xDistance, yDistance} = configs.time.timeLine
+    const { xDistance, yDistance } = configs.time.timeLine
     let { nodes } = sumGraphs
     // 总图的x是居中，y是按value值比例分布。
     // 分帧图是x会产生平移，y也是按比例分布。两者的y坐标都得按比例求
     let valueArr = []
-    Object.values(timeGraphs).forEach((graph,graphIndex)=>{
+    Object.values(timeGraphs).forEach((graph, graphIndex) => {
         Object.values(graph.nodes).forEach((node) => {
             valueArr.push(node.value)
         })
@@ -387,16 +387,16 @@ export const oneMdsLayout = (sumGraphs, timeGraphs, configs) => {
         .scaleLinear()
         .domain(d3.extent(valueArr))
         .range([margin, eachHeight - margin])
-    
-    nodes.forEach((node)=>{
-        node.x = eachWidth/2
+
+    nodes.forEach((node) => {
+        node.x = eachWidth / 2
         node.y = value2y(node.value)
     })
 
-    Object.values(timeGraphs).forEach((graph,graphIndex)=>{
+    Object.values(timeGraphs).forEach((graph, graphIndex) => {
         Object.values(graph.nodes).forEach((node) => {
-            node.x = eachWidth/2+graphIndex*xDistance
-            node.y = value2y(node.value) + graphIndex*yDistance
+            node.x = eachWidth / 2 + graphIndex * xDistance
+            node.y = value2y(node.value) + graphIndex * yDistance
         })
     })
 }
@@ -1009,7 +1009,7 @@ export const setStyle = (timeGraphs, sumGraphs, configs) => {
         } else {
             node.style.nodeStyle = basicNodeStyle
         }
-        if(Array.isArray(node.status)){
+        if (Array.isArray(node.status)) {
             node.status.forEach((d) => {
                 if (!comparisonNode[d]) {
                     node.style[d] = _.cloneDeep(comparisonLink[d])
@@ -1025,7 +1025,7 @@ export const setStyle = (timeGraphs, sumGraphs, configs) => {
         } else {
             link.style.linkStyle = basicLinkStyle
         }
-        if(Array.isArray(link.status)){
+        if (Array.isArray(link.status)) {
             link.status.forEach((d) => {
                 // 该style是用于comparison这种方式
                 link.style[d] = _.cloneDeep(comparisonLink[d])
@@ -1299,67 +1299,67 @@ export const getCompareData = (
 }
 
 export const getShortestDistance = (matrix, start) => {
-    const rows = matrix.length,//rows和cols一样，其实就是顶点个数
+    const rows = matrix.length, //rows和cols一样，其实就是顶点个数
         cols = matrix[0].length
- 
-    if(rows !== cols || start >= rows) return new Error("邻接矩阵错误或者源点错误")
- 
+
+    if (rows !== cols || start >= rows) return new Error('邻接矩阵错误或者源点错误')
+
     //初始化distance
     let distance = new Array(rows).fill(Infinity)
     // 记录逐渐加入点集的过程
     // 初始化访问节点
     let visited = new Array(rows).fill(false)
     distance[start] = 0
-    for(let i = 0; i < rows; i++) {
+    for (let i = 0; i < rows; i++) {
         // 更新节点访问
         visited[start] = true
         // 达到不了的顶点不能作为中转跳点\
-        for(let j = 0; j < cols; j++) {
+        for (let j = 0; j < cols; j++) {
             //通过比较distance[start] + matrix[start][j]和distance[j]的大小来决定是否更新distance[j]。
-            if(matrix[start][j]!==0&&(matrix[start][j] + distance[start] < distance[j])) {
+            if (matrix[start][j] !== 0 && matrix[start][j] + distance[start] < distance[j]) {
                 distance[j] = matrix[start][j] + distance[start]
             }
         }
-        
+
         // 找到当前最短路径顶点作为中转跳点
-        let minIndex = -1;
-        let min = Infinity;
-        for(let k = 0; k < rows; k++) {
-            if ((!visited[k]) && distance[k] < min) {
-                min = distance[k];
-                minIndex = k;
+        let minIndex = -1
+        let min = Infinity
+        for (let k = 0; k < rows; k++) {
+            if (!visited[k] && distance[k] < min) {
+                min = distance[k]
+                minIndex = k
             }
         }
-        
-        if(minIndex!==-1){
+
+        if (minIndex !== -1) {
             start = minIndex
-        }else{
+        } else {
             break
         }
     }
-    return distance;
+    return distance
 }
 
-export const getShortestPath = (matrix, startIndex, endIndex)=>{
-    let visited = new Array(matrix.length).fill(false);
+export const getShortestPath = (matrix, startIndex, endIndex) => {
+    let visited = new Array(matrix.length).fill(false)
     let shortestPath = []
     let shortestDistance = Infinity
     let distance = 0
     let tempPath = []
     visited[startIndex] = true
     tempPath.push(startIndex)
-    function Dfs(startIndex){
-        for(let i=0;i<matrix[startIndex].length;i++){
-            if(visited[i]===false&&matrix[startIndex][i]===1){
+    function Dfs(startIndex) {
+        for (let i = 0; i < matrix[startIndex].length; i++) {
+            if (visited[i] === false && matrix[startIndex][i] === 1) {
                 distance++
                 tempPath.push(i)
-                visited[i]=true
-                if(i === endIndex){
-                    if(distance<shortestDistance){
+                visited[i] = true
+                if (i === endIndex) {
+                    if (distance < shortestDistance) {
                         shortestDistance = distance
                         shortestPath = [...tempPath]
                     }
-                }else{
+                } else {
                     Dfs(i)
                 }
                 distance--
@@ -1372,26 +1372,26 @@ export const getShortestPath = (matrix, startIndex, endIndex)=>{
     return shortestPath
 }
 
-export const getLongestPath = (matrix, startIndex, endIndex)=>{
-    let visited = new Array(matrix.length).fill(false);
+export const getLongestPath = (matrix, startIndex, endIndex) => {
+    let visited = new Array(matrix.length).fill(false)
     let shortestPath = []
     let shortestDistance = Infinity
     let distance = 0
     let tempPath = []
     visited[startIndex] = true
     tempPath.push(startIndex)
-    function Dfs(startIndex){
-        for(let i=0;i<matrix[startIndex].length;i++){
-            if(visited[i]===false&&matrix[startIndex][i]===1){
+    function Dfs(startIndex) {
+        for (let i = 0; i < matrix[startIndex].length; i++) {
+            if (visited[i] === false && matrix[startIndex][i] === 1) {
                 distance++
                 tempPath.push(i)
-                visited[i]=true
-                if(i === endIndex){
-                    if(distance<shortestDistance){
+                visited[i] = true
+                if (i === endIndex) {
+                    if (distance < shortestDistance) {
                         shortestDistance = distance
                         shortestPath = [...tempPath]
                     }
-                }else{
+                } else {
                     Dfs(i)
                 }
                 distance--
@@ -1404,10 +1404,10 @@ export const getLongestPath = (matrix, startIndex, endIndex)=>{
     return shortestPath
 }
 
-export const getFindData = (timeGraphs, configs,sumGraphs) => {
+export const getFindData = (timeGraphs, configs, sumGraphs) => {
     const findOptions = configs.task.find
     if (configs.task.basedType === 'structure') {
-        if(findOptions.structure === 'dumb-bell'){
+        if (findOptions?.structure === 'dumb-bell') {
             // 找结构，现在是假定是找这种类似于哑铃的形态结构。
             for (let timeId in timeGraphs) {
                 const graph = timeGraphs[timeId]
@@ -1423,69 +1423,70 @@ export const getFindData = (timeGraphs, configs,sumGraphs) => {
                     }
                 }
             }
-        }else if(findOptions.structure==='short-path'){
+        } else if (findOptions?.structure === 'short-path') {
             let startIndex = 0
             const mapId2Index = {}
             const mapIndex2Id = []
-            const {nodes, links} = sumGraphs
-            Object.values(nodes).forEach((node)=>{
-                if(mapId2Index[node.id]===undefined){
+            const { nodes, links } = sumGraphs
+            Object.values(nodes).forEach((node) => {
+                if (mapId2Index[node.id] === undefined) {
                     mapId2Index[node.id] = startIndex
                     mapIndex2Id[startIndex] = node.id
-                    startIndex ++
+                    startIndex++
                 }
             })
             let matrix = new Array(startIndex)
-            for(let i=0;i<matrix.length;i++){
+            for (let i = 0; i < matrix.length; i++) {
                 matrix[i] = new Array(startIndex).fill(0)
             }
-            Object.values(links).forEach((link)=>{
+            Object.values(links).forEach((link) => {
                 let sourceIndex = mapId2Index[link.source]
                 let targetIndex = mapId2Index[link.target]
                 matrix[sourceIndex][targetIndex] = 1
                 matrix[targetIndex][sourceIndex] = 1
             })
-            let sIndex =0 ,eIndex = 0
+            let sIndex = 0,
+                eIndex = 0
             let dis = -1
-            for(let i=0;i<startIndex;i++){
+            for (let i = 0; i < startIndex; i++) {
                 const distanceArr = getShortestDistance(matrix, i)
                 // 求出单源最短路径中的最长的那一个
-                let endIndex = i 
+                let endIndex = i
                 let maxDistance = distanceArr[i]
-                distanceArr.forEach((v,index)=>{
-                    if(v!==Infinity&&v>maxDistance){
+                distanceArr.forEach((v, index) => {
+                    if (v !== Infinity && v > maxDistance) {
                         endIndex = index
                         maxDistance = v
                     }
                 })
-                if(maxDistance>dis){
+                if (maxDistance > dis) {
                     dis = maxDistance
                     sIndex = i
                     eIndex = endIndex
                 }
             }
 
-            const shortestPath = getShortestPath(matrix,sIndex,eIndex)
+            const shortestPath = getShortestPath(matrix, sIndex, eIndex)
             const nodeInPathMap = {}
             const linkInPathMap = {}
-            shortestPath.forEach((v,i)=>{
+            shortestPath.forEach((v, i) => {
                 const aId = mapIndex2Id[v]
                 nodeInPathMap[aId] = true
-                if(i!==0){
-                    const bId = mapIndex2Id[shortestPath[i-1]]
+                if (i !== 0) {
+                    const bId = mapIndex2Id[shortestPath[i - 1]]
                     linkInPathMap[`${aId}-${bId}`] = true
                     linkInPathMap[`${bId}-${aId}`] = true
                 }
             })
 
             // 修改总图中的状态
-            for(let linkId in links){
-                if(linkInPathMap[linkId]===true){
+            for (let linkId in links) {
+                if (linkInPathMap[linkId] === true) {
                     links[linkId].status = ['appearLink']
                 }
             }
-            for(let nodeId in nodes) {
-                if(nodeInPathMap[nodeId] === true){
+            for (let nodeId in nodes) {
+                if (nodeInPathMap[nodeId] === true) {
                     nodes[nodeId].status = ['appearNode']
                 }
             }
@@ -1494,17 +1495,17 @@ export const getFindData = (timeGraphs, configs,sumGraphs) => {
             for (let timeId in timeGraphs) {
                 const graph = timeGraphs[timeId]
                 for (let linkId in graph.links) {
-                    if(linkInPathMap[linkId]===true){
+                    if (linkInPathMap[linkId] === true) {
                         graph.links[linkId].status.push('appearLink')
                     }
                 }
-                for(let nodeId in graph.nodes) {
-                    if(nodeInPathMap[nodeId] === true){
+                for (let nodeId in graph.nodes) {
+                    if (nodeInPathMap[nodeId] === true) {
                         graph.nodes[nodeId].status.push('appearNode')
                     }
                 }
             }
-        }      
+        }
     } else {
         const { attr, relation, value } = findOptions
             ? findOptions

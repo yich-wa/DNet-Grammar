@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import ReactJson from 'react-json-view'
 import FileSaver from 'file-saver'
 import { REACT_JSON_OPTIONS } from '../../util/const'

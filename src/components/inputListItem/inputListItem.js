@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React from "react";
 import "./inputListItem.css";
 import deleteSvg from '../../assets/deleteSvg.svg'
 import { connect } from "react-redux"

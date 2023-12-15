@@ -1,10 +1,8 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Slider } from 'antd'
 import { PauseCircleOutlined, PlayCircleOutlined } from '@ant-design/icons'
 import NodeLinkGraph from '../../nodeLinkGraph/nodeLinkGraph.js'
 import { getSvgWidthHeight } from '../../../util/dnetChart'
-import MarkLineItem from '../../markLineItem/markLineItem.js'
-import MarkItemGraph from '../../markItemGraph/markItemGraph.js'
 import './timeAnimationDnet.css'
 
 export default function TimeAnimationDnet(props) {

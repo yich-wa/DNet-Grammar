@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import { converObject2Array } from '../../util/preview.js'
 import DnetChartContainer from '../dnetCharts/dnetChartContainer/dnetChartContainer.js'
 import dnetv from '../../util/dnetv.js'

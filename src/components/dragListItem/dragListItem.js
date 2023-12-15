@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react"
+import React from "react"
 import "./dragListItem.css";
 import addSvg from '../../assets/addSvg.svg'
 import filterSvg from '../../assets/filterSvg.svg'
@@ -27,11 +27,13 @@ function DragListItem(props) {
 				<img
 					className="dli-svg"
 					src={addSvg}
+					alt={'add'}
 					// onClick={() => handleTemplateCheck(v)}
 				/>
                 <img
 					className="dli-svg"
 					src={filterSvg}
+					alt={'filter'}
 					// onClick={() => handleTemplateCheck(v)}
 				/>
 			</div>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Select, Radio, InputNumber } from 'antd'
+import {  Select, Radio, InputNumber } from 'antd'
 import { ChromePicker } from 'react-color'
 import { INSERT_POSITION } from '../../util/dnetChart'
 import {

@@ -3,7 +3,7 @@ import LinkContainer from '../linkContainer/linkContainer.js'
 import DividedLinkItem from '../dividedLinkItem/dividedLinkItem.js'
 import NodeContainer from '../nodeContainer/nodeContainer.js'
 // import Motion from '../motion/Motion'
-import { getLinkOpacity, getPiePathColor } from '../../util/dnetChart.js'
+import { getPiePathColor } from '../../util/dnetChart.js'
 import MarkLineItem from '../markLineItem/markLineItem.js'
 import MarkItemGraph from '../markItemGraph/markItemGraph.js'
 

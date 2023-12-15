@@ -15,7 +15,7 @@ import { initConfig } from '../../util/initConfig.js'
 import * as _ from 'lodash'
 
 function TemplatePanel(props) {
-    const [localStorage, setLocalStorage] = useState(window.localStorage)
+    const { localStorage } = window
     const [storageLength, setStorageLength] = useState(0)
     const [storageKeyArr, setStorageKeyArr] = useState(getStorageKeyArr(localStorage))
 

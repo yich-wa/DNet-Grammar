@@ -1,5 +1,5 @@
 import React from 'react'
-import { Modal, List, Upload, Button, Slider } from 'antd'
+import { Modal, List, Button, Slider } from 'antd'
 // import 'antd/dist/antd.css'
 import './dataPanel.css'
 import { connect } from "react-redux"

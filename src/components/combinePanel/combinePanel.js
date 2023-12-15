@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import './combinePanel.css'
 import TimePanel from '../timePanel/timePanel.js'
 import TaskPanel from '../taskPanel/taskPanel.js'

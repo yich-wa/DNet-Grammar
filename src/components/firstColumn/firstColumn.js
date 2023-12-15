@@ -1,7 +1,6 @@
-import React, { useEffect, useState, useRef } from "react"
+import React from "react"
 import './firstColumn.css'
 import DragListItem from '../dragListItem/dragListItem.js'
-import dataSvg from '../../assets/dataSvg.svg'
 import { connect } from "react-redux"
 import { GRAPH_LAYOUT_TYPE,
 		TIME_ENCODING_TYPE

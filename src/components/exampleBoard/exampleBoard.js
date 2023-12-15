@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React from 'react'
 import Grammar from '../../components/grammar.js'
 import Preview from '../../components/preview/preview.js'
 import * as testData from '../../data/import/test1.json'
@@ -14,7 +14,7 @@ const dataset = [
 ]
 
 export default function ExampleBoard() {
-    const [jsonData, setJsonData] = useState(dataset[0].data)
+    const jsonData = dataset[0].data
     return (
         <div className="example-board">
             {configSet.map((configItem, index) => {
