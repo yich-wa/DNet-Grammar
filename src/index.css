@@ -205,7 +205,7 @@ body::-webkit-scrollbar-thumb {
     width: 1920px;
     overflow-y: hidden;
     overflow: hidden;
-
+    transform-origin: left top;
 }
 
 .comparison-switch{

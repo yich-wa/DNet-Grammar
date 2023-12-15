@@ -15,7 +15,7 @@ export const initConfig = {
         eachHeight: 300,
         margin: 30,
         layout: {
-            chooseType: 'forceDirect',
+            chooseType: 'matrix',
             vertical: {
                 yDistance: 40,
                 linkStyle: {
@@ -52,7 +52,7 @@ export const initConfig = {
             fillColor: '#e6e6e6',
             strokeColor: '#000000',
             strokeWidth: 1,
-            radius: 6,
+            radius: 8,
             strokeType: 'solid',
             textColor: 'white',
             opacity: 1
@@ -117,7 +117,7 @@ export const initConfig = {
         },
         markLine: {
             shape: 'line',
-            strokeType: 'solid',
+            strokeType: 'dashed',
             strokeColor: '#FD8F8F',
             strokeWidth: 1,
             strokeDasharray: '5,5',

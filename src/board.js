@@ -7,17 +7,22 @@ import TemplatePanel from './components/templatePanel/templatePanel.js'
 import CombinePanel from './components/combinePanel/combinePanel.js'
 import graphSvg from './assets/graphIcon.svg'
 import { connect } from "react-redux"
-import { 
-	setGraphData, 
+import {
+    setGraphData,
 } from './redux/graphData.redux.js'
 
 class Board extends React.Component {
     constructor(props) {
         super(props)
+        let scale = 1
+        if (document.documentElement.clientWidth > 1920) {
+            scale = document.documentElement.clientWidth / 1920
+        }
         this.state = {
             board: 'system',
             jsonfile: {},
-            filename: ''
+            filename: '',
+            ratio: scale,
         }
     }
     handleBoardSwitch = (value) => {
@@ -27,13 +32,18 @@ class Board extends React.Component {
             })
         }
     }
+    componentDidMount = () => {
+        
+    }
     render() {
         return (
-            <div className="board">
+            <div className="board" style={{
+                transform: `scale(${this.state.ratio})`
+            }} >
                 <div className="window-header">
-                    <img 
-                        className="title-graph-svg" 
-                        alt={'graph'}                
+                    <img
+                        className="title-graph-svg"
+                        alt={'graph'}
                         src={graphSvg}
                     />
                     <div className="window-header-text">
@@ -56,7 +66,7 @@ class Board extends React.Component {
                             Example
                         </div> */}
                     </div>
-                    
+
                 </div>
                 {this.state.board === 'example' ? (
                     <ExampleBoard></ExampleBoard>
@@ -64,14 +74,14 @@ class Board extends React.Component {
                     <div className="row">
                         <div className="col">
                             <DataPanel />
-                            <GrammarPanel/>
+                            <GrammarPanel />
                         </div>
                         <div className="col">
-                            <CombinePanel/>
+                            <CombinePanel />
                         </div>
                         <div className="col">
-                            <TemplatePanel/>
-                            <Preview/>
+                            <TemplatePanel />
+                            <Preview />
                         </div>
                     </div>
                 )}
@@ -80,12 +90,12 @@ class Board extends React.Component {
     }
 }
 
-const mapStateToProps = (state)=>({
-	graphData: state.graphData
+const mapStateToProps = (state) => ({
+    graphData: state.graphData
 })
 
 const mapDispatchToProps = {
-	setGraphData,
-} 
+    setGraphData,
+}
 
-export default connect(mapStateToProps,mapDispatchToProps)(Board)
+export default connect(mapStateToProps, mapDispatchToProps)(Board)

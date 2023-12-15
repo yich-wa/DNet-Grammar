@@ -304,20 +304,6 @@ class TimePanel extends React.Component {
                                 />
                             ) : null}
                         </div>
-                        <div className="encoding-item-content">
-                            <div className="item-right-option">
-                                <div>Field:</div>
-                                <Select
-                                    value={'time'}
-                                    style={{ width: TPIW }}
-                                    size="small"
-                                >
-                                    <Option key={'time'} value={'time'}>
-                                        {'time'}
-                                    </Option>
-                                </Select>
-                            </div>
-                        </div>
                     </div>
 
                     {/* MarkLine */}

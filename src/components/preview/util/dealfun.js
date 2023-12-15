@@ -3,7 +3,7 @@ import { defaultConfigs } from './defaultConfig'
 import * as assign from 'assign-deep'
 import {getInsertPosition} from '../../../util/dnetChart.js'
 import * as _ from 'lodash'
-// import { link } from '../NetV'
+import { link } from '../NetV'
 export const _intersection = (setA, setB) => {
     let intersection = new Set(setA)
     for (let elem of setA) {
