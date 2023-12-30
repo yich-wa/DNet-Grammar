@@ -1,7 +1,9 @@
 .tad-control-container {
-    margin: 10px;
+    position: sticky;
+    margin-top: 10px;
     margin-left: 20px;
-    width: 100%;
+    left: 20px;
+    width: 400px;
     display: flex;
     justify-content: flex-start;
 }

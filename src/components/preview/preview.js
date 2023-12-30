@@ -26,6 +26,7 @@ function Preview(props) {
                 style={{
                     width: '100%',
                     height: '508px',
+                    position: 'relative',
                     overflowX: 'auto',
                     overflowY:'auto'
                 }}
