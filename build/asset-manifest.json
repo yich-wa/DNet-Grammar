@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/DNet-Grammar/static/css/main.395babe9.chunk.css",
-    "main.js": "/DNet-Grammar/static/js/main.5de54d01.chunk.js",
-    "main.js.map": "/DNet-Grammar/static/js/main.5de54d01.chunk.js.map",
+    "main.css": "/DNet-Grammar/static/css/main.dc705574.chunk.css",
+    "main.js": "/DNet-Grammar/static/js/main.b5ac0876.chunk.js",
+    "main.js.map": "/DNet-Grammar/static/js/main.b5ac0876.chunk.js.map",
     "runtime-main.js": "/DNet-Grammar/static/js/runtime-main.7bde8fe3.js",
     "runtime-main.js.map": "/DNet-Grammar/static/js/runtime-main.7bde8fe3.js.map",
     "static/js/2.33c74ffb.chunk.js": "/DNet-Grammar/static/js/2.33c74ffb.chunk.js",
     "static/js/2.33c74ffb.chunk.js.map": "/DNet-Grammar/static/js/2.33c74ffb.chunk.js.map",
     "index.html": "/DNet-Grammar/index.html",
-    "precache-manifest.91daf0cf907893b6d395c2540b5860d4.js": "/DNet-Grammar/precache-manifest.91daf0cf907893b6d395c2540b5860d4.js",
+    "precache-manifest.3d9f400cd4c1746f357db7bf74a93dda.js": "/DNet-Grammar/precache-manifest.3d9f400cd4c1746f357db7bf74a93dda.js",
     "service-worker.js": "/DNet-Grammar/service-worker.js",
-    "static/css/main.395babe9.chunk.css.map": "/DNet-Grammar/static/css/main.395babe9.chunk.css.map",
+    "static/css/main.dc705574.chunk.css.map": "/DNet-Grammar/static/css/main.dc705574.chunk.css.map",
     "static/js/2.33c74ffb.chunk.js.LICENSE.txt": "/DNet-Grammar/static/js/2.33c74ffb.chunk.js.LICENSE.txt",
     "static/media/index.css": "/DNet-Grammar/static/media/consola.1db29588.ttf",
     "static/media/add.svg": "/DNet-Grammar/static/media/add.1ea1ec04.svg",
@@ -25,7 +25,7 @@
   "entrypoints": [
     "static/js/runtime-main.7bde8fe3.js",
     "static/js/2.33c74ffb.chunk.js",
-    "static/css/main.395babe9.chunk.css",
-    "static/js/main.5de54d01.chunk.js"
+    "static/css/main.dc705574.chunk.css",
+    "static/js/main.b5ac0876.chunk.js"
   ]
 }

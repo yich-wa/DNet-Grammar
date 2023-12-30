@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "4e74c99ba90b672ad040f204691d2cb1",
+    "revision": "99aef495e8e484f015e41ea6b7bb5c98",
     "url": "/DNet-Grammar/index.html"
   },
   {
-    "revision": "bfadf3b5be26a2a21fb3",
-    "url": "/DNet-Grammar/static/css/main.395babe9.chunk.css"
+    "revision": "92a2fcbbee3a8d294685",
+    "url": "/DNet-Grammar/static/css/main.dc705574.chunk.css"
   },
   {
     "revision": "2ef9f658f1e4c95bc1d5",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/DNet-Grammar/static/js/2.33c74ffb.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "bfadf3b5be26a2a21fb3",
-    "url": "/DNet-Grammar/static/js/main.5de54d01.chunk.js"
+    "revision": "92a2fcbbee3a8d294685",
+    "url": "/DNet-Grammar/static/js/main.b5ac0876.chunk.js"
   },
   {
     "revision": "c8ed2b0e13fa9de9eceb",
